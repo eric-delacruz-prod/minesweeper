@@ -117,6 +117,6 @@ class Board():
         elif y > self.y_size:
             raise IndexError(f"The given y coordinate {y} is outside of the bounds of the y-axis (Maximum: {self.y_size-1}).")
         elif type(field) != bool:
-            raise KeyError(f"The given data type {type(bool)} does not correspond to any accepted data types (bool)")
+            raise KeyError(f"The given data type {type(status)} does not correspond to any accepted data types (bool)")
         else:
             self.field[x+(self.y_size*y)][field] = status
