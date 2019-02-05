@@ -35,7 +35,7 @@ def getCoordinate(x, y):
     @param x The x coordinate of the square that is clicked.
     @param y The y coordinate of the square that is clicked.
     @throw IndexError if requested coordinate is off the board.
-    @return A dictionary containing boolean values of the three states: "flagged", "cleared", and "bomb"
+    @return A dictionary containing boolean values of the three states: "flagged", "cleared", and "bomb". If cleared, an additional field, "surrounding" will have the number of bombs surrounding the location.
     '''
     global myBoard
     raise NotImplementedError
