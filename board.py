@@ -46,6 +46,25 @@ class Board():
         @param status If true, set flagged to true. If false, set flagged to false.
         '''
         self._setValue(x, y, status, 'flagged')
+        
+    def setBomb(self, x, y, status):
+        '''
+        Sets the location at (x, y) to be either have a bomb or not have a bomb, dependent upon status.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @param status If true, set bomb to true. If false, set bomb to false.
+        '''
+        self._setValue(x, y, status, 'bomb')
+
+    def setCleared(self, x, y, status):
+        '''
+        Sets the location at (x, y) to be either be cleared or not be cleared, dependent upon status.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @param status If true, set cleared to true. If false, set cleared to false.
+        '''
+        self._setValue(x, y, status, 'cleared')
+
 
     def _setValue(self, x, y, status, field):
         '''
@@ -55,7 +74,7 @@ class Board():
         @param status If true, set field to true. If false, set field to false.
         @param field Which field of the location should be edited.
         @throw IndexError if either x or y falls out of bounds.
-        @throw 
+        @throw KeyError if status is not a bool.
         '''
         if x > self.x_size:
             raise IndexError(f"The given x coordinate {x} is outside of the bounds of the x-axis (Maximum: {self.x_size-1}).")
