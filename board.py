@@ -1,7 +1,6 @@
 #Minesweeper Board
 
 class Board():
-    all_tiles = []
     def __init__(self, x_size, y_size):
         '''
         Sets up the board.
@@ -23,4 +22,18 @@ class Board():
                     'bomb': False, #Whether or not this location contains a bomb.
                 }
                 self.field.append(entry)
-        
+
+    def getTile(self, x, y):
+        '''
+        Returns the dictionary associated with the given coordinate.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @return The dictionary at the given coordinate.
+        @throw IndexError if either x or y falls out of bounds.
+        '''
+        if x > self.x_size:
+            raise IndexError(f"The given x coordinate {x} is outside of the bounds of the x-axis (Maximum: {self.x_size-1}).")
+        elif y > self.y_size:
+            raise IndexError(f"The given y coordinate {y} is outside of the bounds of the y-axis (Maximum: {self.y_size-1}).")
+        else:
+            return self.field[x+(self.y_size*y)]
