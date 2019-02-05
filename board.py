@@ -31,9 +31,9 @@ class Board():
         @return The dictionary at the given coordinate.
         @throw IndexError if either x or y falls out of bounds.
         '''
-        if x > self.x_size:
+        if x > self.x_size or x < 0:
             raise IndexError(f"The given x coordinate {x} is outside of the bounds of the x-axis (Maximum: {self.x_size-1}).")
-        elif y > self.y_size:
+        elif y > self.y_size or y < 0:
             raise IndexError(f"The given y coordinate {y} is outside of the bounds of the y-axis (Maximum: {self.y_size-1}).")
         else:
             return self.field[x+(self.y_size*y)]
@@ -112,9 +112,9 @@ class Board():
         @throw IndexError if either x or y falls out of bounds.
         @throw KeyError if status is not a bool.
         '''
-        if x > self.x_size:
+        if x > self.x_size or x < 0:
             raise IndexError(f"The given x coordinate {x} is outside of the bounds of the x-axis (Maximum: {self.x_size-1}).")
-        elif y > self.y_size:
+        elif y > self.y_size or y < 0:
             raise IndexError(f"The given y coordinate {y} is outside of the bounds of the y-axis (Maximum: {self.y_size-1}).")
         elif type(status) != bool:
             raise KeyError(f"The given data type {type(status)} does not correspond to any accepted data types (bool)")
