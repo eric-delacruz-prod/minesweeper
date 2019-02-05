@@ -37,3 +37,31 @@ class Board():
             raise IndexError(f"The given y coordinate {y} is outside of the bounds of the y-axis (Maximum: {self.y_size-1}).")
         else:
             return self.field[x+(self.y_size*y)]
+    
+    def setFlagged(self, x, y, status):
+        '''
+        Sets the location at (x, y) to be either flagged or unflagged, dependent upon status.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @param status If true, set flagged to true. If false, set flagged to false.
+        '''
+        self._setValue(x, y, status, 'flagged')
+
+    def _setValue(self, x, y, status, field):
+        '''
+        PRIVATE. Sets 'field' at (x, y) to 'status'. You should use one of the intermediate functions to accomplish a task using this function.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @param status If true, set field to true. If false, set field to false.
+        @param field Which field of the location should be edited.
+        @throw IndexError if either x or y falls out of bounds.
+        @throw 
+        '''
+        if x > self.x_size:
+            raise IndexError(f"The given x coordinate {x} is outside of the bounds of the x-axis (Maximum: {self.x_size-1}).")
+        elif y > self.y_size:
+            raise IndexError(f"The given y coordinate {y} is outside of the bounds of the y-axis (Maximum: {self.y_size-1}).")
+        elif type(field) != bool:
+            raise KeyError(f"The given data type {type(bool)} does not correspond to any accepted data types (bool)")
+        else:
+            self.field[x+(self.y_size*y)][field] = status
