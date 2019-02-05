@@ -101,6 +101,34 @@ class Board():
         @return True if (x, y) is cleared, False otherwise.
         '''
         return self.getTile(x, y)['cleared']
+    
+    def getSurrounding(self, x, y):
+        '''Gets a list of all coordinates surrounding the given coordinate, excluding all those that lie out of bounds.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @return A list of tuples. The 0th element of each tuple is the x coordinate, and the 1st element is the y coordinate.
+        '''
+        inRange = lambda x, y: (x>=0) and (x<self.x_size) and (y>=0) and (y<self.y_size) #A lambda is like a mini-function
+        toReturn = []
+        if inRange(x-1, y-1):
+            toReturn.append((x-1, y-1))
+        if inRange(x, y-1):
+            toReturn.append((x, y-1))
+        if inRange(x+1, y-1):
+            toReturn.append((x+1, y-1))
+        if inRange(x-1, y):
+            toReturn.append((x-1, y))
+        if inRange(x+1, y):
+            toReturn.append((x+1, y))
+        if inRange(x-1, y+1):
+            toReturn.append((x-1, y+1))
+        if inRange(x, y+1):
+            toReturn.append((x, y+1))
+        if inRange(x+1, y+1):
+            toReturn.append((x+1, y+1))
+        
+        return toReturn
+        
 
     def _setValue(self, x, y, status, field):
         '''
