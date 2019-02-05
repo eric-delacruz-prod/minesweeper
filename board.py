@@ -65,6 +65,32 @@ class Board():
         '''
         self._setValue(x, y, status, 'cleared')
 
+    def getFlagged(self, x, y):
+        '''
+        Gets whether or not the given coordinate has been flagged.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @return True if (x, y) is flagged, False otherwise.
+        '''
+        return self.getTile(x, y)['flagged']
+    
+    def getBomb(self, x, y):
+        '''
+        Gets whether or not the given coordinate has been bombed.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @return True if (x, y) is bombed, False otherwise.
+        '''
+        return self.getTile(x, y)['bomb']
+
+    def getCleared(self, x, y):
+        '''
+        Gets whether or not the given coordinate has been cleared.
+        @param x The x coordinate.
+        @param y The y coordinate.
+        @return True if (x, y) is cleared, False otherwise.
+        '''
+        return self.getTile(x, y)['cleared']
 
     def _setValue(self, x, y, status, field):
         '''
