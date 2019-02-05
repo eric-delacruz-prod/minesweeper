@@ -44,7 +44,10 @@ class Board():
         @param x The x coordinate.
         @param y The y coordinate.
         @param status If true, set flagged to true. If false, set flagged to false.
+        @throw KeyError If the coordinate at (x, y) is cleared. A Cleared tile may not be set to flagged.
         '''
+        if self.getCleared(x, y):
+            raise KeyError(f"The coordinate ({x},{y}) is cleared, and therefore may not be set to flagged.")
         self._setValue(x, y, status, 'flagged')
         
     def setBomb(self, x, y, status):
@@ -53,16 +56,23 @@ class Board():
         @param x The x coordinate.
         @param y The y coordinate.
         @param status If true, set bomb to true. If false, set bomb to false.
+        @throw KeyError If the coordinate at (x, y) is cleared. A Cleared tile may not be set to bombed.
         '''
+        if self.getCleared(x, y):
+            raise KeyError(f"The coordinate ({x},{y}) is cleared, and therefore may not be set to bombed.")
         self._setValue(x, y, status, 'bomb')
 
-    def setCleared(self, x, y, status):
+    def setCleared(self, x, y, status, safe=True):
         '''
         Sets the location at (x, y) to be either be cleared or not be cleared, dependent upon status.
         @param x The x coordinate.
         @param y The y coordinate.
+        @param safe If set to True, this will raise an error if attempting to set a flagged tile to cleared.
         @param status If true, set cleared to true. If false, set cleared to false.
+        @throw KeyError If the coordinate at (x, y) is flagged if safe is true. A flagged tile may not be set to cleared if safe is true.
         '''
+        if self.getFlagged(x, y) and safe:
+            raise KeyError(f"The coordinate ({x},{y}) is flagged, and therefore may not be set to cleared. To disable this functionality, set the safe parameter to False.")
         self._setValue(x, y, status, 'cleared')
 
     def getFlagged(self, x, y):
