@@ -60,7 +60,10 @@ def getCoordinate(x, y):
 
 def _getBombsAroundTile(x, y):
     '''
-
+    PRIVATE: Get the number of bombs surrounding the given tile.
+    @param x The x coordinate to check around.
+    @param y The y coordinate to check around. 
+    @return The number of bombs surrounding the given coordinate.
     '''
     global myBoard
     coordsSurrounding = myBoard.getSurrounding(x, y)
