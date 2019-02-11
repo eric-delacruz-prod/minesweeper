@@ -36,7 +36,7 @@ class Board():
         elif y > self.y_size or y < 0:
             raise IndexError(f"The given y coordinate {y} is outside of the bounds of the y-axis (Maximum: {self.y_size-1}).")
         else:
-            return self.field[x+(self.y_size*y)]
+            return self.field[x+(self.x_size*y)]
     
     def setFlagged(self, x, y, status):
         '''
