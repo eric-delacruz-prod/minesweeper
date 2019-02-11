@@ -1,5 +1,6 @@
 #Minesweeper Game Logic
 import board as b
+import random
 
 myBoard = b.Board(1, 1)#The global board object. The real values should be set in initialize.
 BOMBS = 0
@@ -20,6 +21,19 @@ def initialize(x_size, y_size, bombs):
     
     myBoard = b.Board(x_size, y_size)
 
+    #Place bombs
+    for i in range(BOMBS):
+        while True:
+            #Get a random x and y
+            random_x = random.randrange(0, x_size)
+            random_y = random.randrange(0, y_size)
+
+            if myBoard.getBomb(random_x, random_y): #Test to see if the randomly chosen coordinate is already a bomb.
+                continue #If it IS a bomb, we go back to the start of the while loop.
+            
+            myBoard.setBomb(random_x, random_y, True) #If there is no bomb there, we set a bomb.
+            break #We then break out of the while loop.
+    
 def click(x, y):
     '''
     What happens on a click of a praticular square. All game logic is handled when this function is called.
