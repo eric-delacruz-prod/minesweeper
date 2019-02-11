@@ -2,16 +2,17 @@
 import board as b
 
 myBoard = b.Board(1, 1)#The global board object. The real values should be set in initialize.
+BOMBS = 0
 
-def initialize(x_size, y_size):
+def initialize(x_size, y_size, bombs):
     '''
     Initializes a new board, and randomizes the placement of bombs within the board.
     @param x_size The size of the board in the x direction.
     @param y_size The size of the board in the y direction.
     @throw IndexError if x_size or y-size is less than or equal to one, which doesn't make sense, silly.
     '''
-    global myBoard
-
+    global myBoard, BOMBS
+    BOMBS = bombs
     if y_size <= 1:
         raise IndexError(f"Requested value of y_size ({y_size}) is too small.")
     if x_size <= 1:
