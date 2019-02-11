@@ -147,4 +147,4 @@ class Board():
         elif type(status) != bool:
             raise KeyError(f"The given data type {type(status)} does not correspond to any accepted data types (bool)")
         else:
-            self.field[x+(self.y_size*y)][field] = status
+            self.field[x+(self.x_size*y)][field] = status
