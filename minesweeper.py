@@ -26,12 +26,14 @@ while run:
     y_current = y
     for i in range(10):
         for j in range(10):
-            pygame.draw.rect(window, (255, 255, 255), (x_current, y_current, 50, 50))
-            x_current += 51
+            #if g.getCoordinate(i, j)['cleared']:
+            #    pygame.draw.rect(window, (210, 210, 210), (x_current, y_current, 50, 50))
+           # else:
+                pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, 50, 50))
+                x_current += 51
         y_current += 51
         x_current = x
 
-    #
     pygame.display.update()
 
 pygame.quit()
