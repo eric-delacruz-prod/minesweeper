@@ -39,7 +39,22 @@ def getCoordinate(x, y):
     @return A dictionary containing boolean values of the three states: "flagged", "cleared", and "bomb". If cleared, an additional field, "surrounding" will have the number of bombs surrounding the location.
     '''
     global myBoard
-    raise NotImplementedError
+    theTile = myBoard.getTile(x, y)
+    if theTile['cleared']:
+        theTile['surrounding'] = _getBombsAroundTile(x, y)
+    return theTile
+
+def _getBombsAroundTile(x, y):
+    '''
+
+    '''
+    global myBoard
+    coordsSurrounding = myBoard.getSurrounding(x, y)
+    numberOfBombs = 0
+    for i in coordsSurrounding:
+        if myBoard.getBomb(i[0], i[1]):
+            numberOfBombs+=1
+    return numberOfBombs
 
 def _display():
     '''
