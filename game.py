@@ -5,6 +5,7 @@ import random
 myBoard = b.Board(1, 1)#The global board object. The real values should be set in initialize.
 BOMBS = 0
 
+
 def initialize(x_size, y_size, bombs):
     '''
     Initializes a new board, and randomizes the placement of bombs within the board.
@@ -12,8 +13,9 @@ def initialize(x_size, y_size, bombs):
     @param y_size The size of the board in the y direction.
     @throw IndexError if x_size or y-size is less than or equal to one, which doesn't make sense, silly.
     '''
-    global myBoard, BOMBS
+    global myBoard, BOMBS, isDead
     BOMBS = bombs
+    isDead = False
     if y_size <= 1:
         raise IndexError(f"Requested value of y_size ({y_size}) is too small.")
     if x_size <= 1:
@@ -34,16 +36,28 @@ def initialize(x_size, y_size, bombs):
             myBoard.setBomb(random_x, random_y, True) #If there is no bomb there, we set a bomb.
             break #We then break out of the while loop.
     
-def click(x, y):
+def leftClick(x, y):
     '''
-    What happens on a click of a praticular square. All game logic is handled when this function is called.
-    @param x The x coordinate of the square that is clicked.
-    @param y The y coordinate of the square that is clicked.
+    What happens on a LEFT click of a particular square. All game logic is handled when this function is called.
+    @param x The x coordinate of the square that is left clicked.
+    @param y The y coordinate of the square that is left clicked.
     @throw IndexError if requested coordinate is off the board.
     '''
     global myBoard
-    raise NotImplementedError
 
+    raise NotImplementedError
+def rightClick(x, y):
+    '''
+    What happens on a RIGHT click of a particular square. Toggles flagged state stored within dictionary at location (x,y)
+    in myBoard.
+    @param x: The x coordinate of the square that is right clicked.
+    @param y: The y coordinate of the square that is right clicked.
+    @return: IndexError if requested coordinate is off the board.
+    '''
+    global myBoard
+    myBoard.setFlagged(x, y, not myBoard.getFlagged())  # toggles the flagged states at (x,y) true->false or false->true
+
+    raise NotImplementedError
 def getCoordinate(x, y):
     '''
     Get the state of the tile at the given coordinate.
