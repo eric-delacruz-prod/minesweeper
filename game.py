@@ -35,13 +35,13 @@ def initialize(x_size, y_size, bombs):
             
             myBoard.setBomb(random_x, random_y, True) #If there is no bomb there, we set a bomb.
             break #We then break out of the while loop.
-def rec_reveal(x, y)
-    if myBoard.getCleared(x, y)
+def rec_reveal(x, y):
+    if myBoard.getCleared(x, y):
         return
-    if myBoard.getBomb(x, y)
+    if myBoard.getBomb(x, y):
         isDead = True
         return
-    if myBoard.getSurrounding(x, y) != 0
+    if myBoard.getSurrounding(x, y) != 0:
         myBoard.setCleared() # reveal spot (x,y) however this is accomplished
 def leftClick(x, y):
     '''
