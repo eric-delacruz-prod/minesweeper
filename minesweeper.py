@@ -3,21 +3,14 @@ import board as b
 import game as g
 import math
 
-pygame.init()
-
+#GLOBALS
 s_width = 700   # Width of screen
 s_height = 700  # Height of screen
 x = 95 # Location of board - x-coord
 y = 95 # Location of board - y-coord
 NUM_BOMBS = 10 # Number of bombs
 
-window = pygame.display.set_mode((s_width, s_height))  # Created window to display game
-window.fill((0, 0, 0))
-
-pygame.display.set_caption("Minesweeper") # Sets menu bar title
-
-g.initialize(x, y, NUM_BOMBS)
-
+#HELPER FUNCTIONS
 def convertPygameCoordinates(pygame_x, pygame_y, offset_x, offset_y, width, height):
     '''
     Converts Pygame coordinates to coordinates on the grid.
@@ -34,6 +27,17 @@ def convertPygameCoordinates(pygame_x, pygame_y, offset_x, offset_y, width, heig
     inGameX = math.floor((pygame_x-offset_x)/width)
     inGameY = math.floor((pygame_y-offset_y)/height)
     return (inGameX, inGameY)
+
+#GUI
+
+#Start Pygame
+pygame.init()
+window = pygame.display.set_mode((s_width, s_height))  # Created window to display game
+window.fill((0, 0, 0))
+pygame.display.set_caption("Minesweeper") # Sets menu bar title
+
+#Initialize Board
+g.initialize(x, y, NUM_BOMBS)
 
 run = True
 # Main game loop
