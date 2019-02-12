@@ -1,6 +1,7 @@
 import pygame
 import board as b
 import game as g
+import math
 
 pygame.init()
 
@@ -16,6 +17,23 @@ window.fill((0, 0, 0))
 pygame.display.set_caption("Minesweeper") # Sets menu bar title
 
 g.initialize(x, y, NUM_BOMBS)
+
+def convertPygameCoordinates(pygame_x, pygame_y, offset_x, offset_y, width, height):
+    '''
+    Converts Pygame coordinates to coordinates on the grid.
+    @param pygame_x X, given by pygame (ie relative to upper left hand corner of the window.)
+    @param pygame_y Y, given by pygame.
+    @param offset_x The X coordinate, in the pygame coordinate system, of the upper left hand corner of the grid.
+    @param offset_y The Y coordinate, in the pygame coordinate system, of the upper left hand corner of the grid.
+    @param width The distance, in terms of pygame coordinates, between grid coordinates in the x direction.
+    @param height The distance, in terms of pygame coordinates, between grid coordinates in the y direction.
+    @return A tuple containing the X and Y coordinates on the grid. (X, Y)
+    @note But how many fence posts did we pass, Freund?
+    '''
+
+    inGameX = math.floor((pygame_x-offset_x)/width)
+    inGameY = math.floor((pygame_y-offset_y)/height)
+    return (inGameX, inGameY)
 
 run = True
 # Main game loop
@@ -37,6 +55,8 @@ while run:
             elif event.button == 3:
                 right_mouse = True
             mouseClicked = True
+    #    if event.type == pygame.MOUSEMOTION:
+    #        print(convertPygameCoordinates(event.pos[0], event.pos[1], x, y, 50, 50))
     #if allEvents != [12] and allEvents != []:
     #    print(allEvents)
 
@@ -68,3 +88,4 @@ while run:
     pygame.display.update()
 
 pygame.quit()
+
