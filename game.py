@@ -64,7 +64,6 @@ def rightClick(x, y):
     global myBoard
     myBoard.setFlagged(x, y, not myBoard.getFlagged())  # toggles the flagged states at (x,y) true->false or false->true
 
-    raise NotImplementedError
 def getCoordinate(x, y):
     '''
     Get the state of the tile at the given coordinate.
