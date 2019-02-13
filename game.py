@@ -35,7 +35,9 @@ def initialize(x_size, y_size, bombs):
             
             myBoard.setBomb(random_x, random_y, True) #If there is no bomb there, we set a bomb.
             break #We then break out of the while loop.
+
 def rec_reveal(x, y):
+    global isDead
     if myBoard.getCleared(x, y):
         return
     if myBoard.getBomb(x, y):
@@ -43,6 +45,7 @@ def rec_reveal(x, y):
         return
     if myBoard.getSurrounding(x, y) != 0:
         myBoard.setCleared() # reveal spot (x,y) however this is accomplished
+
 def leftClick(x, y):
     '''
     What happens on a LEFT click of a particular square. All game logic is handled when this function is called.
@@ -53,6 +56,7 @@ def leftClick(x, y):
     global myBoard
 
     raise NotImplementedError
+
 def rightClick(x, y):
     '''
     What happens on a RIGHT click of a particular square. Toggles flagged state stored within dictionary at location (x,y)

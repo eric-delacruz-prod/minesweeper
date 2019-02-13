@@ -47,9 +47,7 @@ while run:
     left_mouse = False
     right_mouse = False
 
-    #allEvents = []
     for event in pygame.event.get():
-    #    allEvents.append(event)
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -60,8 +58,6 @@ while run:
                 right_mouse = True
         if event.type == pygame.MOUSEMOTION:
             print(convertPygameCoordinates(event.pos[0], event.pos[1], x, y, 50, 50))
-    #if allEvents != [12] and allEvents != []:
-    #    print(allEvents)
 
     if left_mouse:
         #Do some crap with cPC and event.pos
