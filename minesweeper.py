@@ -58,12 +58,15 @@ while run:
                 left_mouse = True
             elif event.button == 3:
                 right_mouse = True
-            mouseClicked = True
-    #    if event.type == pygame.MOUSEMOTION:
-    #        print(convertPygameCoordinates(event.pos[0], event.pos[1], x, y, 50, 50))
+        if event.type == pygame.MOUSEMOTION:
+            print(convertPygameCoordinates(event.pos[0], event.pos[1], x, y, 50, 50))
     #if allEvents != [12] and allEvents != []:
     #    print(allEvents)
 
+    if left_mouse:
+        #Do some crap with cPC and event.pos
+    elif right_mouse:
+        #Same
     '''
     Generates at 10x10 board
     Checks if tile has been "cleared" or "flagged"
