@@ -47,23 +47,21 @@ def rec_reveal(x, y):
     '''
     global isDead
     global myBoard
-    # Check not cleared and not dead
-    if not(myBoard.getCleared(x, y)) and not isDead:
+    # Check that space is not cleared, not a bomb,and not dead.
+    # Also covers case if there is a bomb and it is flagged we
+    # simply return
+    if not(myBoard.getCleared(x, y)) and not(myBoard.getBomb(x, y)) and not isDead:
         # check for case if was not cleared yet and is flagged
         if myBoard.getFlagged(x, y):
             # special case when not cleared and not bomb under flag
             # but this will never be reached by a left click on a
             # flag itself
-            if not(myBoard.getBomb(x, y)):
-                myBoard.setFlagged(x, y, False)
-            # case where we do not want to reveal bc bomb is under flag
-            else:
-                return
+            myBoard.setFlagged(x, y, False)
         # clear the spot since it was clicked and
         # is in a state that is allowed to be cleared
         myBoard.setCleared(x, y, True, False)
-        # spot is already clear but now check if
-        # its an end point for this reveal
+        # spot is already clear, but now check if
+        # its an end point for this reveal branch
         if _getBombsAroundTile(x, y) != 0:
             return
         # spot cleared and is a blank space so search around it
@@ -87,6 +85,7 @@ def leftClick(x, y):
         if not(myBoard.getBomb(x, y)):
             rec_reveal(x, y)
         else:
+            myBoard.setCleared(x, y, True)
             isDead = True
 
 
