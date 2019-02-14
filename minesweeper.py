@@ -8,12 +8,12 @@ SCREEN_X = 700   # Width of screen
 SCREEN_Y = 700  # Height of screen
 OFFSET_X = 95 # Location of board - x-coord
 OFFSET_Y = 95 # Location of board - y-coord
-TILES_X = 10 #Number of tiles in the x direction
-TILES_Y = 10 #Number of tiles in the y direction
+TILES_X = 30 #Number of tiles in the x direction
+TILES_Y = 30 #Number of tiles in the y direction
 GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
-BORDER = 2 #The size, in pixels, of the border between squares.
-NUM_BOMBS = 5 # Number of bombs
+BORDER = 1 #The size, in pixels, of the border between squares.
+NUM_BOMBS = 100 # Number of bombs
 
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_Y
@@ -92,12 +92,12 @@ while run:
                 # Draws circles to be used as flags
                 center_x = int(x_current+(tile_width/2))
                 center_y = int(y_current+(tile_height/2))
-                pygame.draw.circle(window, (255, 0, 0), (center_x, center_y), 10)
+                pygame.draw.circle(window, (255, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
             elif g.getCoordinate(i, j)['bomb']:
                 center_x = int(x_current+(tile_width/2))
                 center_y = int(y_current+(tile_height/2))
-                pygame.draw.circle(window, (0, 0, 0), (center_x, center_y), 10)
-                
+                pygame.draw.circle(window, (0, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
+
             x_current += tile_width + BORDER
         y_current += tile_height + BORDER
         x_current = OFFSET_X
