@@ -122,4 +122,5 @@ def _display():
         selection = input("> ")
         x = int(selection.split(',')[0])
         y = int(selection.split(',')[1])
-        print(f"Clicking at {x}, {y}.\n")
+        print(f"Right Clicking at {x}, {y}.\n")
+        rightClick(x, y)

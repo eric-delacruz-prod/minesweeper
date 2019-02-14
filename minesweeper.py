@@ -64,11 +64,12 @@ while run:
             elif event.button == 3:
                 right_mouse = True
         if event.type == pygame.MOUSEMOTION:
-            x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_height+BORDER, tile_width+BORDER)
+            x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER)
 
     if left_mouse:
         g.leftClick(x_mouse, y_mouse)
     elif right_mouse:
+        print(f"Right Clicking at {(x_mouse, y_mouse)}")
         g.rightClick(x_mouse, y_mouse)
     
     '''
@@ -81,13 +82,18 @@ while run:
         for j in range(TILES_Y):
             if g.getCoordinate(i, j)['cleared']:
                 pygame.draw.rect(window, (210, 210, 210), (x_current, y_current, tile_width, tile_height))
-            if g.getCoordinate(i, j)['flagged']:
-                pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, tile_width, tile_height))
-                # Draws circles to be used as flags
-                pygame.draw.circle(window, (190, 40, 37), (x_current + (tile_width/2), y_current + (tile_height/2)), 10, 0)
+            if i == x_mouse and j == y_mouse:
+                pygame.draw.rect(window, (100, 100, 100), (x_current, y_current, tile_width, tile_height))
             else:
                 pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, tile_width, tile_height))
-                x_current += tile_width + BORDER
+            
+            if g.getCoordinate(i, j)['flagged']:                
+                #pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, tile_width, tile_height))
+                # Draws circles to be used as flags
+                center_x = int(x_current+(tile_width/2))
+                center_y = int(y_current+(tile_height/2))
+                pygame.draw.circle(window, (255, 0, 0), (center_x, center_y), 10)
+            x_current += tile_width + BORDER
         y_current += tile_height + BORDER
         x_current = OFFSET_X
     # Ends game if ESC is pressed
