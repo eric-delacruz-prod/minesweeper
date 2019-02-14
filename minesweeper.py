@@ -8,11 +8,11 @@ SCREEN_X = 700   # Width of screen
 SCREEN_Y = 700  # Height of screen
 OFFSET_X = 95 # Location of board - x-coord
 OFFSET_Y = 95 # Location of board - y-coord
-TILES_X = 3 #Number of tiles in the x direction
-TILES_Y = 3 #Number of tiles in the y direction
+TILES_X = 10 #Number of tiles in the x direction
+TILES_Y = 10 #Number of tiles in the y direction
 GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
-BORDER = 1 #The size, in pixels, of the border between squares.
+BORDER = 2 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 1 # Number of bombs
 
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
@@ -54,23 +54,23 @@ while run:
 
     left_mouse = False
     right_mouse = False
-
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            x_mouse, y_mouse = event.pos
             if event.button == 1:
                 left_mouse = True
             elif event.button == 3:
                 right_mouse = True
         if event.type == pygame.MOUSEMOTION:
-            print(convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_height+BORDER, tile_width+BORDER))
+            x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_height+BORDER, tile_width+BORDER)
 
     if left_mouse:
-        print("hay")
+        g.leftClick(x_mouse, y_mouse)
     elif right_mouse:
-        print("yo")
+        g.rightClick(x_mouse, y_mouse)
+    
     '''
     Generates at 10x10 board
     Checks if tile has been "cleared" or "flagged"
