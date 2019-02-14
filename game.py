@@ -37,23 +37,56 @@ def initialize(x_size, y_size, bombs):
             break #We then break out of the while loop.
 
 def rec_reveal(x, y):
+    '''
+    Reveals spaces after a left click. By checking all
+    surrounding spaces and determining if they are also
+    in need of revealing we continue until there is no
+    direction that is valid to reveal
+    @param x The x coordinate of the square that is left clicked.
+    @param y The y coordinate of the square that is left clicked.
+    '''
     global isDead
-    if myBoard.getCleared(x, y):
-        return
-    if myBoard.getBomb(x, y):
-        isDead = True
-        return
-    if myBoard.getSurrounding(x, y) != 0:
-        myBoard.setCleared() # reveal spot (x,y) however this is accomplished
+    global myBoard
+    # Check not cleared and not dead
+    if not(myBoard.getCleared(x, y)) and not isDead:
+        # check for case if was not cleared yet and flagged
+        if myBoard.getFlagged(x, y):
+            # special case when not cleared and not bomb under flag
+            # but this will never be reached by a left click on a
+            # flag itself
+            if not(myBoard.getBomb(x, y)):
+                myBoard.setFlagged(x, y, False)
+            # case where we do not want to reveal bc bomb is under flag
+            else:
+                return
+        # clear the spot since it was clicked and
+        # is in a state that is allowed to be cleared
+        myBoard.setCleared(x, y, True, False)
+        # spot is already clear but now check if
+        # its an end point for this reveal
+        if _getBombsAroundTile(x, y) != 0:
+            return
+        # spot cleared and is a blank space so search around it
+        # begin process over again for each surrounding square
+        # in range
+        coordsList = myBoard.getSurrounding(x, y)
+        for i in coordsList:
+            rec_reveal(i[0], i[1])
 
 def leftClick(x, y):
     '''
-    What happens on a LEFT click of a particular square. All game logic is handled when this function is called.
-    @param x The x coordinate of the square that is left clicked.
-    @param y The y coordinate of the square that is left clicked.
-    @throw IndexError if requested coordinate is off the board.
+    What happens on a LEFT click of a particular square.
+    All game logic is handled when this function is called.
+    @param x: The x coordinate of the square that is left clicked.
+    @param y: The y coordinate of the square that is left clicked.
+    @return: none
     '''
-    global myBoard
+    global myBoard, isDead
+    if not(myBoard.getFlagged(x, y)):
+        if not(myBoard.getBomb(x, y)):
+            rec_reveal(x, y)
+        else:
+            isDead = True
 
     raise NotImplementedError
 
@@ -63,7 +96,7 @@ def rightClick(x, y):
     in myBoard.
     @param x: The x coordinate of the square that is right clicked.
     @param y: The y coordinate of the square that is right clicked.
-    @return: IndexError if requested coordinate is off the board.
+    @return: none
     '''
     global myBoard
     myBoard.setFlagged(x, y, not myBoard.getFlagged())  # toggles the flagged states at (x,y) true->false or false->true
