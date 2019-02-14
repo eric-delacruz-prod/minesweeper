@@ -66,7 +66,7 @@ def rightClick(x, y):
     @return: IndexError if requested coordinate is off the board.
     '''
     global myBoard
-    myBoard.setFlagged(x, y, not myBoard.getFlagged())  # toggles the flagged states at (x,y) true->false or false->true
+    myBoard.setFlagged(x, y, not myBoard.getFlagged(x, y))  # toggles the flagged states at (x,y) true->false or false->true
 
 def getCoordinate(x, y):
     '''
