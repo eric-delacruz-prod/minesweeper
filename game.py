@@ -81,12 +81,15 @@ def leftClick(x, y):
     @return: none
     '''
     global myBoard, isDead
-    if not(myBoard.getFlagged(x, y)):
-        if not(myBoard.getBomb(x, y)):
-            rec_reveal(x, y)
-        else:
-            myBoard.setCleared(x, y, True)
-            isDead = True
+    if myBoard.getFlagged(x, y):
+        pass
+    elif myBoard.getCleared(x, y):
+        pass
+    elif myBoard.getBomb(x, y):
+        isDead = True
+    elif not myBoard.getCleared(x, y):
+        rec_reveal(x, y)
+        myBoard.setCleared(x, y, True)
 
 
 def rightClick(x, y):
