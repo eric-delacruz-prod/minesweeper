@@ -49,7 +49,7 @@ def rec_reveal(x, y):
     global myBoard
     # Check not cleared and not dead
     if not(myBoard.getCleared(x, y)) and not isDead:
-        # check for case if was not cleared yet and flagged
+        # check for case if was not cleared yet and is flagged
         if myBoard.getFlagged(x, y):
             # special case when not cleared and not bomb under flag
             # but this will never be reached by a left click on a
@@ -75,8 +75,9 @@ def rec_reveal(x, y):
 
 def leftClick(x, y):
     '''
-    What happens on a LEFT click of a particular square.
-    All game logic is handled when this function is called.
+    Will invoke a recursive reveal function if the spot clicked
+    is not flagged and not a bomb, otherwise the isDead is set
+    to true if a bomb is clicked
     @param x: The x coordinate of the square that is left clicked.
     @param y: The y coordinate of the square that is left clicked.
     @return: none
@@ -88,7 +89,6 @@ def leftClick(x, y):
         else:
             isDead = True
 
-    raise NotImplementedError
 
 def rightClick(x, y):
     '''
