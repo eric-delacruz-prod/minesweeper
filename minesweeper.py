@@ -2,6 +2,8 @@ import pygame
 import board as b
 import game as g
 import math
+import time
+import random
 
 #GLOBALS
 SCREEN_X = 700   # Width of screen
@@ -35,6 +37,18 @@ def convertPygameCoordinates(pygame_x, pygame_y, offset_x, offset_y, width, heig
     inGameX = math.floor((pygame_x-offset_x)/width)
     inGameY = math.floor((pygame_y-offset_y)/height)
     return (inGameX, inGameY)
+
+def gameOver():
+    '''
+    Puts some randomly colored circles on the screen, which sorta kinda look like an explosion
+    '''
+    global window
+    time.sleep(0.5)
+    random_x = random.randrange(0, SCREEN_X)
+    random_y = random.randrange(0, SCREEN_Y)
+    random_r = random.randrange(30, 300)
+    random_c = (255, random.randrange(0, 255), random.randrange(0, 20))
+    pygame.draw.circle(window, random_c, (random_x, random_y), random_r)
 
 #GUI
 
@@ -106,6 +120,8 @@ while run:
     if keys[pygame.K_ESCAPE]:
         run = False
 
+    if g.isDead:
+        gameOver()
     pygame.display.flip()
     #pygame.display.update()
 
