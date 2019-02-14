@@ -10,12 +10,12 @@ SCREEN_X = 700   # Width of screen
 SCREEN_Y = 700  # Height of screen
 OFFSET_X = 95 # Location of board - x-coord
 OFFSET_Y = 95 # Location of board - y-coord
-TILES_X = 30 #Number of tiles in the x direction
-TILES_Y = 30 #Number of tiles in the y direction
+TILES_X = 15 #Number of tiles in the x direction
+TILES_Y = 15 #Number of tiles in the y direction
 GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
-NUM_BOMBS = 100 # Number of bombs
+NUM_BOMBS = 20 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
 EXPLOSION_TIME = 0.5 #How long between explosions on game over. Do you dare set it to 0?
 
@@ -60,6 +60,9 @@ window = pygame.display.set_mode((SCREEN_X, SCREEN_Y))  # Created window to disp
 window.fill((0, 0, 0))
 pygame.display.set_caption("Minesweeper") # Sets menu bar title
 
+# Font generation
+pygame.font.init()
+
 #Initialize Board
 g.initialize(TILES_X, TILES_Y, NUM_BOMBS)
 
@@ -92,12 +95,18 @@ while run:
     Generates at 10x10 board
     Checks if tile has been "cleared" or "flagged"
     '''
+    tileFont = pygame.font.SysFont('Times New Roman', 50)
+
     x_current = OFFSET_X
     y_current = OFFSET_Y
     for j in range(TILES_Y):
         for i in range(TILES_X):
             if g.getCoordinate(i, j)['cleared']:
                 pygame.draw.rect(window, (255, 255, 255), (x_current, y_current, tile_width, tile_height))
+                num = g.getCoordinate(i, j)['surrounding']
+                if num != 0:
+                    tileNum = tileFont.render(str(num), 1, (0, 0, 0))
+                    window.blit(tileNum, (x_current, y_current))
             elif i == x_mouse and j == y_mouse:
                 pygame.draw.rect(window, (100, 100, 100), (x_current, y_current, tile_width, tile_height))
             else:
@@ -117,6 +126,7 @@ while run:
             x_current += tile_width + BORDER
         y_current += tile_height + BORDER
         x_current = OFFSET_X
+
     # Ends game if ESC is pressed
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
