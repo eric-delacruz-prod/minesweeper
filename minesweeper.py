@@ -78,11 +78,11 @@ while run:
     '''
     x_current = OFFSET_X
     y_current = OFFSET_Y
-    for i in range(TILES_X):
-        for j in range(TILES_Y):
+    for j in range(TILES_Y):
+        for i in range(TILES_X):
             if g.getCoordinate(i, j)['cleared']:
-                pygame.draw.rect(window, (210, 210, 210), (x_current, y_current, tile_width, tile_height))
-            if i == x_mouse and j == y_mouse:
+                pygame.draw.rect(window, (255, 255, 255), (x_current, y_current, tile_width, tile_height))
+            elif i == x_mouse and j == y_mouse:
                 pygame.draw.rect(window, (100, 100, 100), (x_current, y_current, tile_width, tile_height))
             else:
                 pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, tile_width, tile_height))
@@ -101,7 +101,8 @@ while run:
     if keys[pygame.K_ESCAPE]:
         run = False
 
-    pygame.display.update()
+    pygame.display.flip()
+    #pygame.display.update()
 
 pygame.quit()
 
