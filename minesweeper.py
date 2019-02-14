@@ -15,7 +15,7 @@ TILES_Y = 15 #Number of tiles in the y direction
 GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
-NUM_BOMBS = 1 # Number of bombs
+NUM_BOMBS = 10 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
 EXPLOSION_TIME = 0.5 #How long between explosions on game over. Do you dare set it to 0?
 
@@ -111,7 +111,7 @@ while run:
                 num = g.getCoordinate(i, j)['surrounding']
                 if num != 0:
                     tileNum = tileFont.render(str(num), 1, (0, 0, 0))
-                    window.blit(tileNum, (x_current, y_current-(tile_height/2)+3))
+                    window.blit(tileNum, (x_current + (tile_width/5), y_current))
             elif i == x_mouse and j == y_mouse:
                 pygame.draw.rect(window, (100, 100, 100), (x_current, y_current, tile_width, tile_height))
             else:
