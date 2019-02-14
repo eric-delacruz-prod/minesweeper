@@ -4,6 +4,7 @@ import random
 
 myBoard = b.Board(1, 1)#The global board object. The real values should be set in initialize.
 BOMBS = 0
+rev_tiles = 0
 
 
 def initialize(x_size, y_size, bombs):
@@ -47,6 +48,7 @@ def rec_reveal(x, y):
     '''
     global isDead
     global myBoard
+    global rev_tiles
     # Check that space is not cleared, not a bomb,and not dead.
     # Also covers case if there is a bomb and it is flagged we
     # simply return
@@ -60,6 +62,8 @@ def rec_reveal(x, y):
         # clear the spot since it was clicked and
         # is in a state that is allowed to be cleared
         myBoard.setCleared(x, y, True, False)
+        rev_tiles += 1  # Increments tiles revealed for win condition
+
         # spot is already clear, but now check if
         # its an end point for this reveal branch
         if _getBombsAroundTile(x, y) != 0:

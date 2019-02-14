@@ -15,7 +15,7 @@ TILES_Y = 15 #Number of tiles in the y direction
 GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
-NUM_BOMBS = 20 # Number of bombs
+NUM_BOMBS = 1 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
 EXPLOSION_TIME = 0.5 #How long between explosions on game over. Do you dare set it to 0?
 
@@ -23,6 +23,11 @@ tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_Y
 
 #HELPER FUNCTIONS
+def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
+    total = Tiles_X * Tiles_Y - NUM_BOMBS
+    if rev_tiles == total:
+        return True
+
 def convertPygameCoordinates(pygame_x, pygame_y, offset_x, offset_y, width, height):
     '''
     Converts Pygame coordinates to coordinates on the grid.
@@ -135,6 +140,11 @@ while run:
     if g.isDead:
         SHOW_BOMBS = True
         gameOver()
+
+    if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
+        winFont = pygame.font.SysFont('Times New Roman', 100)
+        winMsg = winFont.render("YOU WIN!", 1, (0, 255, 0))
+        window.blit(winMsg, (200, 350))
     
     pygame.display.flip()
     #pygame.display.update()
