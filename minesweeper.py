@@ -16,6 +16,8 @@ GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 100 # Number of bombs
+SHOW_BOMBS = False #Whether bombs should be shown.
+EXPLOSION_TIME = 0.5 #How long between explosions on game over. Do you dare set it to 0?
 
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_Y
@@ -43,7 +45,7 @@ def gameOver():
     Puts some randomly colored circles on the screen, which sorta kinda look like an explosion
     '''
     global window
-    time.sleep(0.5)
+    time.sleep(EXPLOSION_TIME)
     random_x = random.randrange(0, SCREEN_X)
     random_y = random.randrange(0, SCREEN_Y)
     random_r = random.randrange(30, 300)
@@ -107,7 +109,7 @@ while run:
                 center_x = int(x_current+(tile_width/2))
                 center_y = int(y_current+(tile_height/2))
                 pygame.draw.circle(window, (255, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
-            elif g.getCoordinate(i, j)['bomb']:
+            elif g.getCoordinate(i, j)['bomb'] and SHOW_BOMBS:
                 center_x = int(x_current+(tile_width/2))
                 center_y = int(y_current+(tile_height/2))
                 pygame.draw.circle(window, (0, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
@@ -121,7 +123,9 @@ while run:
         run = False
 
     if g.isDead:
+        SHOW_BOMBS = True
         gameOver()
+    
     pygame.display.flip()
     #pygame.display.update()
 
