@@ -111,7 +111,7 @@ while run:
                 num = g.getCoordinate(i, j)['surrounding']
                 if num != 0:
                     tileNum = tileFont.render(str(num), 1, (0, 0, 0))
-                    window.blit(tileNum, (x_current, y_current))
+                    window.blit(tileNum, (x_current, y_current-(tile_height/2)+3))
             elif i == x_mouse and j == y_mouse:
                 pygame.draw.rect(window, (100, 100, 100), (x_current, y_current, tile_width, tile_height))
             else:
