@@ -98,7 +98,8 @@ def rightClick(x, y):
     @return: none
     '''
     global myBoard
-    myBoard.setFlagged(x, y, not myBoard.getFlagged(x, y))  # toggles the flagged states at (x,y) true->false or false->true
+    if not myBoard.getCleared(x, y):
+        myBoard.setFlagged(x, y, not myBoard.getFlagged(x, y))  # toggles the flagged states at (x,y) true->false or false->true
 
 def getCoordinate(x, y):
     '''
