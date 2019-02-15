@@ -18,7 +18,8 @@ GAME_SIZE_Y = 30*TILES_X #The size, in pixels, of the playing area in the y dire
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
-EXPLOSION_TIME = 0.5 #How long between explosions on game over. Do you dare set it to 0?
+EXPLOSION_TIME = 10 #How many frames between explosions on game over. Do you dare set it to 0?
+NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
 
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = tile_width
@@ -60,7 +61,6 @@ def gameOver():
     Puts some randomly colored circles on the screen, which sorta kinda look like an explosion
     '''
     global window
-    time.sleep(EXPLOSION_TIME)
     random_x = random.randrange(0, SCREEN_X)
     random_y = random.randrange(0, SCREEN_Y)
     random_r = random.randrange(30, 300)
@@ -84,6 +84,7 @@ g.initialize(TILES_X, TILES_Y, NUM_BOMBS)
 run = True
 # Main game loop
 while run:
+
     pygame.time.delay(50)
 
     left_mouse = False
@@ -112,7 +113,8 @@ while run:
     Generates at 10x10 board
     Checks if tile has been "cleared" or "flagged"
     '''
-    tileFont = pygame.font.SysFont("", 50)
+    fontSize = math.floor((tile_height * 1.5))  # Scales font based on the tile size
+    tileFont = pygame.font.SysFont("", fontSize)
 
     x_current = OFFSET_X
     y_current = OFFSET_Y
@@ -150,11 +152,20 @@ while run:
         run = False
 
     if g.isDead:
+        loseFont = pygame.font.SysFont("", 100)
+        loseMsg = loseFont.render("GAME OVER!", 1, (0, 0, 0))
+        window.blit(loseMsg, (125, 300))
+        if explosionFrame > EXPLOSION_TIME and NUMBER_EXPLOSIONS > 0:
+            gameOver()
+            explosionFrame = 0
+            NUMBER_EXPLOSIONS-=1
+        explosionFrame+=1
+        pygame.event.set_blocked(pygame.MOUSEMOTION)
         SHOW_BOMBS = True
-        gameOver()
 
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
-        winFont = pygame.font.SysFont('Times New Roman', 5 * TILES_X)
+        pygame.event.set_blocked(pygame.MOUSEMOTION)
+        winFont = pygame.font.SysFont("", 5*TILES_X)
         winMsg = winFont.render("YOU WIN!", 1, (0, 255, 0))
         window.blit(winMsg, (SCREEN_X/6, SCREEN_Y/3))
 
