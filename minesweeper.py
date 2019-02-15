@@ -97,12 +97,14 @@ while run:
                 right_mouse = True
         if event.type == pygame.MOUSEMOTION:
             x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER)
-
-    if left_mouse:
-        g.leftClick(x_mouse, y_mouse)
-    elif right_mouse:
-        print(f"Right Clicking at {(x_mouse, y_mouse)}")
-        g.rightClick(x_mouse, y_mouse)
+    try:
+        if left_mouse:
+            g.leftClick(x_mouse, y_mouse)
+        elif right_mouse:
+            print(f"Right Clicking at {(x_mouse, y_mouse)}")
+            g.rightClick(x_mouse, y_mouse)
+    except IndexError:
+        pass
     
     '''
     Generates at 10x10 board
