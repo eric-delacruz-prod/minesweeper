@@ -110,7 +110,7 @@ while run:
     Generates at 10x10 board
     Checks if tile has been "cleared" or "flagged"
     '''
-    fontSize = math.floor((tile_height * 1.5))
+    fontSize = math.floor((tile_height * 1.5))  # Scales font based on the tile size
     tileFont = pygame.font.SysFont("", fontSize)
 
     x_current = OFFSET_X
