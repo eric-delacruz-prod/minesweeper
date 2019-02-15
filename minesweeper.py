@@ -112,7 +112,8 @@ while run:
     Generates at 10x10 board
     Checks if tile has been "cleared" or "flagged"
     '''
-    tileFont = pygame.font.SysFont("", 50)
+    fontSize = math.floor((tile_height * 1.5))  # Scales font based on the tile size
+    tileFont = pygame.font.SysFont("", fontSize)
 
     x_current = OFFSET_X
     y_current = OFFSET_Y
@@ -155,9 +156,11 @@ while run:
             explosionFrame = 0
             NUMBER_EXPLOSIONS-=1
         explosionFrame+=1
+        pygame.event.set_blocked(pygame.MOUSEMOTION)
         SHOW_BOMBS = True
 
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
+        pygame.event.set_blocked(pygame.MOUSEMOTION)
         winFont = pygame.font.SysFont('Times New Roman', 100)
         winMsg = winFont.render("YOU WIN!", 1, (0, 255, 0))
         window.blit(winMsg, (200, 350))
