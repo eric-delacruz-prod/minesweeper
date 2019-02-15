@@ -151,6 +151,9 @@ while run:
         run = False
 
     if g.isDead:
+        loseFont = pygame.font.SysFont("", 100)
+        loseMsg = loseFont.render("GAME OVER!", 1, (0, 0, 0))
+        window.blit(loseMsg, (125, 300))
         if explosionFrame > EXPLOSION_TIME and NUMBER_EXPLOSIONS > 0:
             gameOver()
             explosionFrame = 0
@@ -161,7 +164,7 @@ while run:
 
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
         pygame.event.set_blocked(pygame.MOUSEMOTION)
-        winFont = pygame.font.SysFont('Times New Roman', 100)
+        winFont = pygame.font.SysFont("", 100)
         winMsg = winFont.render("YOU WIN!", 1, (0, 255, 0))
         window.blit(winMsg, (200, 350))
     
