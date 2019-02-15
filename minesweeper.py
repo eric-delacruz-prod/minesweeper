@@ -110,7 +110,7 @@ while run:
     Generates at 10x10 board
     Checks if tile has been "cleared" or "flagged"
     '''
-    tileFont = pygame.font.SysFont('Times New Roman', 50)
+    tileFont = pygame.font.SysFont("", 50)
 
     x_current = OFFSET_X
     y_current = OFFSET_Y
