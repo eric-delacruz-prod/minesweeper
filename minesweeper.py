@@ -17,10 +17,12 @@ GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
-EXPLOSION_TIME = 0.5 #How long between explosions on game over. Do you dare set it to 0?
+EXPLOSION_TIME = 10 #How many frames between explosions on game over. Do you dare set it to 0?
+NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
 
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_Y
+explosionFrame = 0
 
 #HELPER FUNCTIONS
 def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
@@ -58,7 +60,6 @@ def gameOver():
     Puts some randomly colored circles on the screen, which sorta kinda look like an explosion
     '''
     global window
-    time.sleep(EXPLOSION_TIME)
     random_x = random.randrange(0, SCREEN_X)
     random_y = random.randrange(0, SCREEN_Y)
     random_r = random.randrange(30, 300)
@@ -82,6 +83,7 @@ g.initialize(TILES_X, TILES_Y, NUM_BOMBS)
 run = True
 # Main game loop
 while run:
+
     pygame.time.delay(50)
 
     left_mouse = False
@@ -148,8 +150,12 @@ while run:
         run = False
 
     if g.isDead:
+        if explosionFrame > EXPLOSION_TIME and NUMBER_EXPLOSIONS > 0:
+            gameOver()
+            explosionFrame = 0
+            NUMBER_EXPLOSIONS-=1
+        explosionFrame+=1
         SHOW_BOMBS = True
-        gameOver()
 
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
         winFont = pygame.font.SysFont('Times New Roman', 100)
