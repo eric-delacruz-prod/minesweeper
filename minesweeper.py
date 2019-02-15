@@ -6,21 +6,23 @@ import time
 import random
 
 #GLOBALS
-SCREEN_X = 700   # Width of screen
-SCREEN_Y = 700  # Height of screen
-OFFSET_X = 95 # Location of board - x-coord
-OFFSET_Y = 95 # Location of board - y-coord
-TILES_X = 15 #Number of tiles in the x direction
-TILES_Y = 15 #Number of tiles in the y direction
-GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
-GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
+
+OFFSET_X = 0 # Location of board - x-coord
+OFFSET_Y = 0 # Location of board - y-coord
+TILES_X = 20 #Number of tiles in the x direction
+TILES_Y = 20 #Number of tiles in the y direction
+SCREEN_X = 30*TILES_X # Width of screen
+SCREEN_Y = 30*TILES_Y # Height of screen
+GAME_SIZE_X = 30*TILES_X #The size, in pixels, of the playing area in the x direction
+GAME_SIZE_Y = 30*TILES_X #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
 EXPLOSION_TIME = 0.5 #How long between explosions on game over. Do you dare set it to 0?
 
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
-tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_Y
+tile_height = tile_width
+# tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_X
 
 #HELPER FUNCTIONS
 def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
@@ -152,10 +154,10 @@ while run:
         gameOver()
 
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
-        winFont = pygame.font.SysFont('Times New Roman', 100)
+        winFont = pygame.font.SysFont('Times New Roman', 5 * TILES_X)
         winMsg = winFont.render("YOU WIN!", 1, (0, 255, 0))
-        window.blit(winMsg, (200, 350))
-    
+        window.blit(winMsg, (SCREEN_X/6, SCREEN_Y/3))
+
     pygame.display.flip()
     #pygame.display.update()
 
