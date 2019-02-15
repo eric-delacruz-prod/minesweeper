@@ -24,6 +24,14 @@ tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_Y
 
 #HELPER FUNCTIONS
 def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
+    '''
+    Determines whether the game meets the win condition of minesweeper
+    :param Tiles_X: Number of tiles in X direction
+    :param Tiles_Y: Number of tiles in Y direction
+    :param NUM_BOMBS: Total bombs in the game
+    :param rev_tiles: Number of revealed tiles being counted in game.py (must use g.rev_tiles)
+    :return: Boolean of True if condition is met
+    '''
     total = Tiles_X * Tiles_Y - NUM_BOMBS
     if rev_tiles == total:
         return True
