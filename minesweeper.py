@@ -10,8 +10,8 @@ SCREEN_X = 700   # Width of screen
 SCREEN_Y = 700  # Height of screen
 OFFSET_X = 95 # Location of board - x-coord
 OFFSET_Y = 95 # Location of board - y-coord
-TILES_X = 15 #Number of tiles in the x direction
-TILES_Y = 15 #Number of tiles in the y direction
+TILES_X = 30 #Number of tiles in the x direction
+TILES_Y = 30 #Number of tiles in the y direction
 GAME_SIZE_X = 500 #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 500 #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
@@ -28,11 +28,11 @@ explosionFrame = 0
 def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
     '''
     Determines whether the game meets the win condition of minesweeper
-    :param Tiles_X: Number of tiles in X direction
-    :param Tiles_Y: Number of tiles in Y direction
-    :param NUM_BOMBS: Total bombs in the game
-    :param rev_tiles: Number of revealed tiles being counted in game.py (must use g.rev_tiles)
-    :return: Boolean of True if condition is met
+    @param Tiles_X: Number of tiles in X direction
+    @param Tiles_Y: Number of tiles in Y direction
+    @param NUM_BOMBS: Total bombs in the game
+    @param rev_tiles: Number of revealed tiles being counted in game.py (must use g.rev_tiles)
+    @return: Boolean of True if condition is met
     '''
     total = Tiles_X * Tiles_Y - NUM_BOMBS
     if rev_tiles == total:
@@ -57,7 +57,7 @@ def convertPygameCoordinates(pygame_x, pygame_y, offset_x, offset_y, width, heig
 
 def gameOver():
     '''
-    Puts some randomly colored circles on the screen, which sorta kinda look like an explosion
+    Puts a randomly colored circles on the screen, which sorta kinda look like an explosion
     '''
     global window
     random_x = random.randrange(0, SCREEN_X)
@@ -69,70 +69,72 @@ def gameOver():
 #GUI
 
 #Start Pygame
-pygame.init()
+pygame.init() #Starts pygame
 window = pygame.display.set_mode((SCREEN_X, SCREEN_Y))  # Created window to display game
-window.fill((0, 0, 0))
+window.fill((0, 0, 0)) #Makes the screen be black.
 pygame.display.set_caption("Minesweeper") # Sets menu bar title
-
-# Font generation
-pygame.font.init()
+pygame.font.init() #Starts the font engine.
 
 #Initialize Board
-g.initialize(TILES_X, TILES_Y, NUM_BOMBS)
+g.initialize(TILES_X, TILES_Y, NUM_BOMBS) #This is a game.py functionality, it sets up the board.
 
-run = True
-# Main game loop
-while run:
+run = True #This controls the main game loop.
+#Main game loop. The program does this over and over, drawing things to the screen repeatedly.
+#Tiles are rectangles, drawn to the screen. Flags and bombs are just circles. Text (ie, for the numbers surrounding the bombs) are surface objects containing text.
 
-    pygame.time.delay(50)
+while run:  
 
+    pygame.time.delay(50) #This makes sure that the game doesn't run too fast. Disable at your own risk!
+
+    #We set up the left and right mouse buttons to default to not pressed.
     left_mouse = False
     right_mouse = False
     
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
+    #Check for things that have happened.
+    for event in pygame.event.get(): #pygame.event.get gets a LIST of EVENTS. You can see this in action by printing these to the screen.
+        if event.type == pygame.QUIT: #This is what occurs when you press the "x" button.
+            run = False #When the user x's out, we stop the loop.
+        if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
+            if event.button == 1: #1 is left click. We set the left click flag to true.
                 left_mouse = True
-            elif event.button == 3:
+            elif event.button == 3: #3 is right click. (Think Left, Middle, Right)
                 right_mouse = True
-        if event.type == pygame.MOUSEMOTION:
-            x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER)
+        if event.type == pygame.MOUSEMOTION: #Check to see if the mouse has moved.
+            x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
+    
+    #Handle mouse clicks. We include a try/except block to check for index out of range errors (when you click off the board).
     try:
         if left_mouse:
             g.leftClick(x_mouse, y_mouse)
         elif right_mouse:
-            print(f"Right Clicking at {(x_mouse, y_mouse)}")
             g.rightClick(x_mouse, y_mouse)
     except IndexError:
         pass
     
-    '''
-    Generates at 10x10 board
-    Checks if tile has been "cleared" or "flagged"
-    '''
-    fontSize = math.floor((tile_height * 1.5))  # Scales font based on the tile size
-    tileFont = pygame.font.SysFont("", fontSize)
+    #Generate the board
+    fontSize = math.floor((tile_height * 1.5))  #Get font size based on the tile size. 
+    tileFont = pygame.font.SysFont("", fontSize) #We get the font object. We use pygames "default" font.
 
-    x_current = OFFSET_X
+    x_current = OFFSET_X #x_current and y_current are pygame coordiates of the grid coordinates that we are drawing. We start at the offset. 
     y_current = OFFSET_Y
-    for j in range(TILES_Y):
+    for j in range(TILES_Y): #i, j represent grid x and y respectively.
         for i in range(TILES_X):
-            if g.getCoordinate(i, j)['cleared']:
-                pygame.draw.rect(window, (255, 255, 255), (x_current, y_current, tile_width, tile_height))
-                num = g.getCoordinate(i, j)['surrounding']
-                if num != 0:
+            #Draw the tile.
+            #NOTE: getCoordinate is a game.py function that returns a dictionary object, with booleans containing different states.
+            if g.getCoordinate(i, j)['cleared']: #For example, in this conditional, we check to see if the current tile is cleared.
+                pygame.draw.rect(window, (255, 255, 255), (x_current, y_current, tile_width, tile_height)) #If it is cleared, we draw a white rectangle 
+                num = g.getCoordinate(i, j)['surrounding'] #There is also an element of the returned dictionary, surrounding. This key contains the number of bombs surrounding the tile.
+                #Show the number of bombs surrounding the position.
+                if num != 0: #We don't want to print anything is num == 0 (As this would clutter the screen)
                     tileNum = tileFont.render(str(num), 1, (0, 0, 0))
                     window.blit(tileNum, (x_current + (tile_width/5), y_current))
-            elif i == x_mouse and j == y_mouse:
+            elif i == x_mouse and j == y_mouse: #Highlight the current square.
                 pygame.draw.rect(window, (100, 100, 100), (x_current, y_current, tile_width, tile_height))
-            else:
+            else: #Draw an uncleared square.
                 pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, tile_width, tile_height))
             
+            #Draw flag/bomb as a circle. Flags take precedance.
             if g.getCoordinate(i, j)['flagged']:                
-                #pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, tile_width, tile_height))
-                # Draws circles to be used as flags
                 center_x = int(x_current+(tile_width/2))
                 center_y = int(y_current+(tile_height/2))
                 pygame.draw.circle(window, (255, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
@@ -141,15 +143,16 @@ while run:
                 center_y = int(y_current+(tile_height/2))
                 pygame.draw.circle(window, (0, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
 
-            x_current += tile_width + BORDER
-        y_current += tile_height + BORDER
-        x_current = OFFSET_X
+            x_current += tile_width + BORDER #Increment the current position by the width of the tile, and the border. Keep in mind that this is the upper left-hand corner of the next tile that will be drawn.
+        y_current += tile_height + BORDER #Like the preceding statement, we increment by the border and the height. Keep in mind that increasing y is downward.
+        x_current = OFFSET_X #Reset the current x coordinate to the origin.
 
     # Ends game if ESC is pressed
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
         run = False
 
+    #Handle death.
     if g.isDead:
         if explosionFrame > EXPLOSION_TIME and NUMBER_EXPLOSIONS > 0:
             gameOver()
@@ -159,6 +162,7 @@ while run:
         pygame.event.set_blocked(pygame.MOUSEMOTION)
         SHOW_BOMBS = True
 
+    #Handle Win.
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
         pygame.event.set_blocked(pygame.MOUSEMOTION)
         winFont = pygame.font.SysFont('Times New Roman', 100)
@@ -166,7 +170,7 @@ while run:
         window.blit(winMsg, (200, 350))
     
     pygame.display.flip()
-    #pygame.display.update()
 
-pygame.quit()
+print("Quitted gracefully.")
+pygame.quit() #If the main game loop breaks, we quit.
 
