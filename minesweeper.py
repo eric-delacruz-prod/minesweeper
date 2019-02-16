@@ -48,9 +48,9 @@ try:
     else:
         raise Exception
 
-    assert user_bombs > 1
     assert user_height > 1
     assert user_width > 1
+    assert (user_bombs >= 1) and (user_bombs < (user_height * user_width))
     NUM_BOMBS = user_bombs
     NUM_FLAGS = user_bombs
     TILES_X = user_width
