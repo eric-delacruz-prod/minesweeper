@@ -18,11 +18,12 @@ GAME_SIZE_Y = 30*TILES_X #The size, in pixels, of the playing area in the y dire
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
-EXPLOSION_TIME = 10 #How many frames between explosions on game over. Do you dare set it to 0?
+EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
 
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = tile_width
+explosionFrame = 0
 # tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_X
 
 #HELPER FUNCTIONS
