@@ -4,6 +4,7 @@ import game as g
 import math
 import time
 import random
+import sys
 
 #GLOBALS
 
@@ -11,20 +12,66 @@ OFFSET_X = 0 # Location of board - x-coord
 OFFSET_Y = 0 # Location of board - y-coord
 TILES_X = 20 #Number of tiles in the x direction
 TILES_Y = 20 #Number of tiles in the y direction
-SCREEN_X = 30*TILES_X # Width of screen
-SCREEN_Y = 30*TILES_Y # Height of screen
-GAME_SIZE_X = 30*TILES_X #The size, in pixels, of the playing area in the x direction
-GAME_SIZE_Y = 30*TILES_X #The size, in pixels, of the playing area in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
 SHOW_BOMBS = False #Whether bombs should be shown.
 EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
 
+
+#HANDLE USER VARIABLES
+#Handle input from the command line. Valid formats are:
+#-No arguments (which leaves TILES_X and TILES_Y as they are)
+#-<bombs> <width/height>
+#-<bombs> <width> <height>
+try:
+    user_bombs = 0
+    user_height = 0
+    user_width = 0
+    args = sys.argv
+    if len(args) == 1:
+        #No arguments specified (except for the file, of course ;) )
+        user_bombs = NUM_BOMBS
+        user_height = TILES_Y
+        user_width = TILES_X
+    elif len(args) == 3:
+        #When two arguments are specified.
+        user_bombs = int(args[1])
+        user_height = int(args[2])
+        user_width = user_height
+    elif len(args) == 4:
+        #When three arguments are specified.
+        user_bombs = int(args[1])
+        user_height = int(args[3])
+        user_width = int(args[2])
+    else:
+        raise Exception
+
+    assert user_bombs > 1
+    assert user_height > 1
+    assert user_width > 1
+    NUM_BOMBS = user_bombs
+    TILES_X = user_width
+    TILES_Y = user_height
+except:
+    print("USAGE: ")
+    print("python minesweeper.py")
+    print("python minesweeper.py <number of bombs> <number of tiles in x and y directions>")
+    print("python minesweeper.py <number of bombs> <number of tiles in x direction> <number of tiles in y direction>")
+    sys.exit() 
+
+#Assertations regarding game size. There is a maximum game size.
+assert TILES_X <= 50, "Game is too large. Maximum size is 50."
+assert TILES_X <= 50, "Game is too large. Maximum size is 50."
+
+#DO MATH WITH SCREEN SIZE
+SCREEN_X = 30*TILES_X # Width of screen
+SCREEN_Y = 30*TILES_Y # Height of screen
+GAME_SIZE_X = 30*TILES_X #The size, in pixels, of the playing area in the x direction
+GAME_SIZE_Y = 30*TILES_X #The size, in pixels, of the playing area in the y direction
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = tile_width
 explosionFrame = 0
-# tile_height = (GAME_SIZE_Y-(TILES_Y*BORDER))/TILES_X
 
 #HELPER FUNCTIONS
 def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
