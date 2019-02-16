@@ -14,6 +14,7 @@ TILES_X = 20 #Number of tiles in the x direction
 TILES_Y = 20 #Number of tiles in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
+NUM_FLAGS = 10 # Number of flags
 SHOW_BOMBS = False #Whether bombs should be shown.
 EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
@@ -51,6 +52,7 @@ try:
     assert user_height > 1
     assert user_width > 1
     NUM_BOMBS = user_bombs
+    NUM_FLAGS = user_bombs
     TILES_X = user_width
     TILES_Y = user_height
 except:
