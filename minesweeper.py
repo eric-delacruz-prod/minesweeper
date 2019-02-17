@@ -133,15 +133,16 @@ run = True #This controls the main game loop.
 #Main game loop. The program does this over and over, drawing things to the screen repeatedly.
 #Tiles are rectangles, drawn to the screen. Flags and bombs are just circles. Text (ie, for the numbers surrounding the bombs) are surface objects containing text.
 
-while run:  
+x_mouse = 0  # Setting x and y mouse coordinates prior to game run prevents x_mouse not defined error
+y_mouse = 0
+
+while run:
 
     pygame.time.delay(50) #This makes sure that the game doesn't run too fast. Disable at your own risk!
 
     #We set up the left and right mouse buttons to default to not pressed.
     left_mouse = False
     right_mouse = False
-    x_mouse = 0
-    y_mouse = 0
     
     #Check for things that have happened.
     for event in pygame.event.get(): #pygame.event.get gets a LIST of EVENTS. You can see this in action by printing these to the screen.
