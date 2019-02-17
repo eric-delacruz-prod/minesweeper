@@ -138,6 +138,8 @@ while run:
     #We set up the left and right mouse buttons to default to not pressed.
     left_mouse = False
     right_mouse = False
+    x_mouse = 0
+    y_mouse = 0
     
     #Check for things that have happened.
     for event in pygame.event.get(): #pygame.event.get gets a LIST of EVENTS. You can see this in action by printing these to the screen.
