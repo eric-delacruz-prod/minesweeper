@@ -13,5 +13,5 @@ Game Logic: Zach Fruend
 
 GUI: Zach Davis
 
-Tests: Guanyu Li and Gwen Liu
+Tests: Guanyu Li, Aris Vinsant, and Gwen Liu
 
