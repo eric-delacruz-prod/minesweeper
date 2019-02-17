@@ -229,7 +229,7 @@ while run:
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
         pygame.event.set_blocked(pygame.MOUSEMOTION)
         winFont = pygame.font.SysFont("", 5*TILES_X)
-        winMsg = winFont.render("YOU WIN!", 1, (0, 255, 0))
+        winMsg = winFont.render("YOU WIN!", 1, (0, 175, 0))
         window.blit(winMsg, (SCREEN_X/6, SCREEN_Y/3))
 
     pygame.display.flip()
