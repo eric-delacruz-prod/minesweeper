@@ -150,10 +150,14 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
             if event.button == 1: #1 is left click. We set the left click flag to true.
                 left_mouse = True
-            elif (event.button == 3) and (NUM_FLAGS > 0): #3 is right click. (Think Left, Middle, Right)
+            elif (event.button == 3) and (NUM_FLAGS > 0):#3 is right click. (Think Left, Middle, Right)
                 right_mouse = True
-                NUM_FLAGS-=1
-                print(NUM_FLAGS)
+                x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
+                if (g.myBoard.getFlagged(x_mouse, y_mouse) == False):
+                    NUM_FLAGS -= 1
+                else:
+                     NUM_FLAGS += 1                
+                #print(NUM_FLAGS) #for debugging purposes
         if event.type == pygame.MOUSEMOTION: #Check to see if the mouse has moved.
             x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
     
