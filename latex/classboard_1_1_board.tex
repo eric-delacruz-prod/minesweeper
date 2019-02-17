@@ -1,0 +1,167 @@
+\hypertarget{classboard_1_1_board}{}\section{board.\+Board Class Reference}
+\label{classboard_1_1_board}\index{board.Board@{board.Board}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_a9a83d6d877f51e6d7b6a30c2b17cf321}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classboard_1_1_board_a7fed89e2d304ae0a8e3579279e3fdf13}{x\+\_\+size}}, \mbox{\hyperlink{classboard_1_1_board_a753e98035a83120eb1aa26c227a53c9b}{y\+\_\+size}})
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_afceaa19167d36a8b6a80da6647e1a3c5}{get\+Tile}} (self, x, y)
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_aa873286b9859c0a13f446f776fa7b125}{set\+Flagged}} (self, x, y, status)
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_a44ed72c4fc9f25109c0b1fc4478c9f49}{set\+Bomb}} (self, x, y, status)
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_ae82ac3a91638d8a76ad52e8ba83a60b7}{set\+Cleared}} (self, x, y, status, safe=True)
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_a1e824cb6d46a2c1cb1e142436b3d012f}{get\+Flagged}} (self, x, y)
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_ab8f21f26a453a5ef383a0dc91256a598}{get\+Bomb}} (self, x, y)
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_a06cacb801d5880d3267ed1aea0486072}{get\+Cleared}} (self, x, y)
+\item 
+def \mbox{\hyperlink{classboard_1_1_board_aa3453607b9850fa2a074ee7595a332f2}{get\+Surrounding}} (self, x, y)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classboard_1_1_board_a7fed89e2d304ae0a8e3579279e3fdf13}{x\+\_\+size}}
+\item 
+\mbox{\hyperlink{classboard_1_1_board_a753e98035a83120eb1aa26c227a53c9b}{y\+\_\+size}}
+\item 
+\mbox{\hyperlink{classboard_1_1_board_aba360fdddf89e1cc92bfd0dc98233b74}{field}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classboard_1_1_board_a9a83d6d877f51e6d7b6a30c2b17cf321}\label{classboard_1_1_board_a9a83d6d877f51e6d7b6a30c2b17cf321}} 
+\index{board.Board@{board.Board}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def board.\+Board.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x\+\_\+size,  }\item[{}]{y\+\_\+size }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets up the board.
+@param x_size The size of the board along the x-axis.
+@param y_size The size of the board along the y-axis.
+\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classboard_1_1_board_ab8f21f26a453a5ef383a0dc91256a598}\label{classboard_1_1_board_ab8f21f26a453a5ef383a0dc91256a598}} 
+\index{board.Board@{board.Board}!getBomb@{getBomb}}
+\index{getBomb@{getBomb}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{getBomb()}{getBomb()}}
+{\footnotesize\ttfamily def board.\+Board.\+get\+Bomb (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gets whether or not the given coordinate has been bombed.
+@param x The x coordinate.
+@param y The y coordinate.
+@return True if (x, y) is bombed, False otherwise.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classboard_1_1_board_a06cacb801d5880d3267ed1aea0486072}\label{classboard_1_1_board_a06cacb801d5880d3267ed1aea0486072}} 
+\index{board.Board@{board.Board}!getCleared@{getCleared}}
+\index{getCleared@{getCleared}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{getCleared()}{getCleared()}}
+{\footnotesize\ttfamily def board.\+Board.\+get\+Cleared (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gets whether or not the given coordinate has been cleared.
+@param x The x coordinate.
+@param y The y coordinate.
+@return True if (x, y) is cleared, False otherwise.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classboard_1_1_board_a1e824cb6d46a2c1cb1e142436b3d012f}\label{classboard_1_1_board_a1e824cb6d46a2c1cb1e142436b3d012f}} 
+\index{board.Board@{board.Board}!getFlagged@{getFlagged}}
+\index{getFlagged@{getFlagged}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{getFlagged()}{getFlagged()}}
+{\footnotesize\ttfamily def board.\+Board.\+get\+Flagged (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gets whether or not the given coordinate has been flagged.
+@param x The x coordinate.
+@param y The y coordinate.
+@return True if (x, y) is flagged, False otherwise.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classboard_1_1_board_aa3453607b9850fa2a074ee7595a332f2}\label{classboard_1_1_board_aa3453607b9850fa2a074ee7595a332f2}} 
+\index{board.Board@{board.Board}!getSurrounding@{getSurrounding}}
+\index{getSurrounding@{getSurrounding}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{getSurrounding()}{getSurrounding()}}
+{\footnotesize\ttfamily def board.\+Board.\+get\+Surrounding (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gets a list of all coordinates surrounding the given coordinate, excluding all those that lie out of bounds.
+@param x The x coordinate.
+@param y The y coordinate.
+@return A list of tuples. The 0th element of each tuple is the x coordinate, and the 1st element is the y coordinate.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classboard_1_1_board_afceaa19167d36a8b6a80da6647e1a3c5}\label{classboard_1_1_board_afceaa19167d36a8b6a80da6647e1a3c5}} 
+\index{board.Board@{board.Board}!getTile@{getTile}}
+\index{getTile@{getTile}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{getTile()}{getTile()}}
+{\footnotesize\ttfamily def board.\+Board.\+get\+Tile (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Returns the dictionary associated with the given coordinate.
+@param x The x coordinate.
+@param y The y coordinate.
+@return The dictionary at the given coordinate.
+@throw IndexError if either x or y falls out of bounds.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classboard_1_1_board_a44ed72c4fc9f25109c0b1fc4478c9f49}\label{classboard_1_1_board_a44ed72c4fc9f25109c0b1fc4478c9f49}} 
+\index{board.Board@{board.Board}!setBomb@{setBomb}}
+\index{setBomb@{setBomb}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{setBomb()}{setBomb()}}
+{\footnotesize\ttfamily def board.\+Board.\+set\+Bomb (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{status }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets the location at (x, y) to be either have a bomb or not have a bomb, dependent upon status.
+@param x The x coordinate.
+@param y The y coordinate.
+@param status If true, set bomb to true. If false, set bomb to false.
+@throw KeyError If the coordinate at (x, y) is cleared. A Cleared tile may not be set to bombed.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classboard_1_1_board_ae82ac3a91638d8a76ad52e8ba83a60b7}\label{classboard_1_1_board_ae82ac3a91638d8a76ad52e8ba83a60b7}} 
+\index{board.Board@{board.Board}!setCleared@{setCleared}}
+\index{setCleared@{setCleared}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{setCleared()}{setCleared()}}
+{\footnotesize\ttfamily def board.\+Board.\+set\+Cleared (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{status,  }\item[{}]{safe = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets the location at (x, y) to be either be cleared or not be cleared, dependent upon status.
+@param x The x coordinate.
+@param y The y coordinate.
+@param safe If set to True, this will raise an error if attempting to set a flagged tile to cleared.
+@param status If true, set cleared to true. If false, set cleared to false.
+@throw KeyError If the coordinate at (x, y) is flagged if safe is true. A flagged tile may not be set to cleared if safe is true.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classboard_1_1_board_aa873286b9859c0a13f446f776fa7b125}\label{classboard_1_1_board_aa873286b9859c0a13f446f776fa7b125}} 
+\index{board.Board@{board.Board}!setFlagged@{setFlagged}}
+\index{setFlagged@{setFlagged}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{setFlagged()}{setFlagged()}}
+{\footnotesize\ttfamily def board.\+Board.\+set\+Flagged (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{status }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets the location at (x, y) to be either flagged or unflagged, dependent upon status.
+@param x The x coordinate.
+@param y The y coordinate.
+@param status If true, set flagged to true. If false, set flagged to false.
+@throw KeyError If the coordinate at (x, y) is cleared. A Cleared tile may not be set to flagged.
+\end{DoxyVerb}
+ 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classboard_1_1_board_aba360fdddf89e1cc92bfd0dc98233b74}\label{classboard_1_1_board_aba360fdddf89e1cc92bfd0dc98233b74}} 
+\index{board.Board@{board.Board}!field@{field}}
+\index{field@{field}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{field}{field}}
+{\footnotesize\ttfamily board.\+Board.\+field}
+
+\mbox{\Hypertarget{classboard_1_1_board_a7fed89e2d304ae0a8e3579279e3fdf13}\label{classboard_1_1_board_a7fed89e2d304ae0a8e3579279e3fdf13}} 
+\index{board.Board@{board.Board}!x\_size@{x\_size}}
+\index{x\_size@{x\_size}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{x\_size}{x\_size}}
+{\footnotesize\ttfamily board.\+Board.\+x\+\_\+size}
+
+\mbox{\Hypertarget{classboard_1_1_board_a753e98035a83120eb1aa26c227a53c9b}\label{classboard_1_1_board_a753e98035a83120eb1aa26c227a53c9b}} 
+\index{board.Board@{board.Board}!y\_size@{y\_size}}
+\index{y\_size@{y\_size}!board.Board@{board.Board}}
+\subsubsection{\texorpdfstring{y\_size}{y\_size}}
+{\footnotesize\ttfamily board.\+Board.\+y\+\_\+size}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{board_8py}{board.\+py}}\end{DoxyCompactItemize}
