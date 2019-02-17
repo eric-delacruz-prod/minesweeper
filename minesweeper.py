@@ -215,7 +215,7 @@ while run:
     #Handle death.
     if g.isDead:
         loseFont = pygame.font.SysFont("", 5*TILES_X)
-        loseMsg = loseFont.render("GAME OVER!", 1, (0, 0, 0))
+        loseMsg = loseFont.render("GAME OVER!", 1, (175, 0, 0))
         window.blit(loseMsg, (SCREEN_X/6, SCREEN_Y/3))
         if explosionFrame > EXPLOSION_TIME and NUMBER_EXPLOSIONS > 0:
             gameOver()
