@@ -14,6 +14,7 @@ TILES_X = 20 #Number of tiles in the x direction
 TILES_Y = 20 #Number of tiles in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
+NUM_FLAGS = 10 # Number of flags
 SHOW_BOMBS = False #Whether bombs should be shown.
 EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
@@ -47,10 +48,11 @@ try:
     else:
         raise Exception
 
-    assert user_bombs > 1
     assert user_height > 1
     assert user_width > 1
+    assert (user_bombs >= 1) and (user_bombs < (user_height * user_width))
     NUM_BOMBS = user_bombs
+    NUM_FLAGS = user_bombs
     TILES_X = user_width
     TILES_Y = user_height
 except:
@@ -148,8 +150,10 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
             if event.button == 1: #1 is left click. We set the left click flag to true.
                 left_mouse = True
-            elif event.button == 3: #3 is right click. (Think Left, Middle, Right)
+            elif (event.button == 3) and (NUM_FLAGS > 0): #3 is right click. (Think Left, Middle, Right)
                 right_mouse = True
+                NUM_FLAGS-=1
+                print(NUM_FLAGS)
         if event.type == pygame.MOUSEMOTION: #Check to see if the mouse has moved.
             x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
     
@@ -185,10 +189,10 @@ while run:
                 pygame.draw.rect(window, (40, 135, 200), (x_current, y_current, tile_width, tile_height))
             
             #Draw flag/bomb as a circle. Flags take precedance.
-            if g.getCoordinate(i, j)['flagged']:                
-                center_x = int(x_current+(tile_width/2))
-                center_y = int(y_current+(tile_height/2))
-                pygame.draw.circle(window, (255, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
+            if g.getCoordinate(i, j)['flagged']:         
+                    center_x = int(x_current+(tile_width/2))
+                    center_y = int(y_current+(tile_height/2))
+                    pygame.draw.circle(window, (255, 0, 0), (center_x, center_y), int(min(tile_height, tile_width)/4))
             elif g.getCoordinate(i, j)['bomb'] and SHOW_BOMBS:
                 center_x = int(x_current+(tile_width/2))
                 center_y = int(y_current+(tile_height/2))
