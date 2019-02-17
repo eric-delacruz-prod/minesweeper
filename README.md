@@ -8,7 +8,7 @@ Type the following command into the command line in the directory in which the p
 
 You can change the size of the board and the number of bombs by adding additional arguments, like so:
 
-"python minesweeper.py <number of bombs> <size along one side>
+"python minesweeper.py [number of bombs] [size along one side]
 
 ## Documentation
 
