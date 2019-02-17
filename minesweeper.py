@@ -63,8 +63,8 @@ except:
     sys.exit() 
 
 #Assertations regarding game size. There is a maximum game size.
-assert TILES_X <= 50, "Game is too large. Maximum size is 50."
-assert TILES_X <= 50, "Game is too large. Maximum size is 50."
+assert TILES_X <= 30, "Game is too large. Maximum size is 30."
+assert TILES_X <= 30, "Game is too large. Maximum size is 30."
 
 #DO MATH WITH SCREEN SIZE
 SCREEN_X = 30*TILES_X # Width of screen
