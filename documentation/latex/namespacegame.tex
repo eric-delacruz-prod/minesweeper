@@ -1,0 +1,109 @@
+\hypertarget{namespacegame}{}\section{game Namespace Reference}
+\label{namespacegame}\index{game@{game}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacegame_aeff970ada18ae074610055efd1094336}{initialize}} (x\+\_\+size, y\+\_\+size, bombs)
+\item 
+def \mbox{\hyperlink{namespacegame_a2037de1992c21b7b89134d2523e2613a}{rec\+\_\+reveal}} (x, y)
+\item 
+def \mbox{\hyperlink{namespacegame_abe058d32c820bac4e3cef6d7fe4a46a9}{left\+Click}} (x, y)
+\item 
+def \mbox{\hyperlink{namespacegame_a004c6f8ef3349c23a158399780ec85be}{right\+Click}} (x, y)
+\item 
+def \mbox{\hyperlink{namespacegame_a06fbfc9a0a7901893478f3c433ce40ec}{get\+Coordinate}} (x, y)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacegame_a3c18f6e9c14fb8b2ee7b7d3a571d9871}{my\+Board}} = b.\+Board(1, 1)
+\item 
+int \mbox{\hyperlink{namespacegame_a3eb01cc0a7bb0f38c53f6d096a912956}{B\+O\+M\+BS}} = 0
+\item 
+int \mbox{\hyperlink{namespacegame_a6cd9259a874ea0314ecba5873425a8b0}{rev\+\_\+tiles}} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacegame_a06fbfc9a0a7901893478f3c433ce40ec}\label{namespacegame_a06fbfc9a0a7901893478f3c433ce40ec}} 
+\index{game@{game}!getCoordinate@{getCoordinate}}
+\index{getCoordinate@{getCoordinate}!game@{game}}
+\subsubsection{\texorpdfstring{getCoordinate()}{getCoordinate()}}
+{\footnotesize\ttfamily def game.\+get\+Coordinate (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get the state of the tile at the given coordinate.
+@param x The x coordinate of the square that is clicked.
+@param y The y coordinate of the square that is clicked.
+@throw IndexError if requested coordinate is off the board.
+@return A dictionary containing boolean values of the three states: "flagged", "cleared", and "bomb". If cleared, an additional field, "surrounding" will have the number of bombs surrounding the location.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacegame_aeff970ada18ae074610055efd1094336}\label{namespacegame_aeff970ada18ae074610055efd1094336}} 
+\index{game@{game}!initialize@{initialize}}
+\index{initialize@{initialize}!game@{game}}
+\subsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily def game.\+initialize (\begin{DoxyParamCaption}\item[{}]{x\+\_\+size,  }\item[{}]{y\+\_\+size,  }\item[{}]{bombs }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes a new board, and randomizes the placement of bombs within the board.
+@param x_size The size of the board in the x direction.
+@param y_size The size of the board in the y direction.
+@throw IndexError if x_size or y-size is less than or equal to one, which doesn't make sense, silly.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacegame_abe058d32c820bac4e3cef6d7fe4a46a9}\label{namespacegame_abe058d32c820bac4e3cef6d7fe4a46a9}} 
+\index{game@{game}!leftClick@{leftClick}}
+\index{leftClick@{leftClick}!game@{game}}
+\subsubsection{\texorpdfstring{leftClick()}{leftClick()}}
+{\footnotesize\ttfamily def game.\+left\+Click (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Will invoke a recursive reveal function if the spot clicked
+is not flagged and not a bomb, otherwise the isDead is set
+to true if a bomb is clicked
+@param x: The x coordinate of the square that is left clicked.
+@param y: The y coordinate of the square that is left clicked.
+@return: none
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacegame_a2037de1992c21b7b89134d2523e2613a}\label{namespacegame_a2037de1992c21b7b89134d2523e2613a}} 
+\index{game@{game}!rec\_reveal@{rec\_reveal}}
+\index{rec\_reveal@{rec\_reveal}!game@{game}}
+\subsubsection{\texorpdfstring{rec\_reveal()}{rec\_reveal()}}
+{\footnotesize\ttfamily def game.\+rec\+\_\+reveal (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reveals spaces after a left click. By checking all
+surrounding spaces and determining if they are also
+in need of revealing we continue until there is no
+direction that is valid to reveal
+@param x The x coordinate of the square that is left clicked.
+@param y The y coordinate of the square that is left clicked.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacegame_a004c6f8ef3349c23a158399780ec85be}\label{namespacegame_a004c6f8ef3349c23a158399780ec85be}} 
+\index{game@{game}!rightClick@{rightClick}}
+\index{rightClick@{rightClick}!game@{game}}
+\subsubsection{\texorpdfstring{rightClick()}{rightClick()}}
+{\footnotesize\ttfamily def game.\+right\+Click (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}What happens on a RIGHT click of a particular square. Toggles flagged state stored within dictionary at location (x,y)
+in myBoard.
+@param x: The x coordinate of the square that is right clicked.
+@param y: The y coordinate of the square that is right clicked.
+@return: none
+\end{DoxyVerb}
+ 
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespacegame_a3eb01cc0a7bb0f38c53f6d096a912956}\label{namespacegame_a3eb01cc0a7bb0f38c53f6d096a912956}} 
+\index{game@{game}!BOMBS@{BOMBS}}
+\index{BOMBS@{BOMBS}!game@{game}}
+\subsubsection{\texorpdfstring{BOMBS}{BOMBS}}
+{\footnotesize\ttfamily int game.\+B\+O\+M\+BS = 0}
+
+\mbox{\Hypertarget{namespacegame_a3c18f6e9c14fb8b2ee7b7d3a571d9871}\label{namespacegame_a3c18f6e9c14fb8b2ee7b7d3a571d9871}} 
+\index{game@{game}!myBoard@{myBoard}}
+\index{myBoard@{myBoard}!game@{game}}
+\subsubsection{\texorpdfstring{myBoard}{myBoard}}
+{\footnotesize\ttfamily game.\+my\+Board = b.\+Board(1, 1)}
+
+\mbox{\Hypertarget{namespacegame_a6cd9259a874ea0314ecba5873425a8b0}\label{namespacegame_a6cd9259a874ea0314ecba5873425a8b0}} 
+\index{game@{game}!rev\_tiles@{rev\_tiles}}
+\index{rev\_tiles@{rev\_tiles}!game@{game}}
+\subsubsection{\texorpdfstring{rev\_tiles}{rev\_tiles}}
+{\footnotesize\ttfamily int game.\+rev\+\_\+tiles = 0}
+

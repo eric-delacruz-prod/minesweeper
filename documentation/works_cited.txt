@@ -1,0 +1,12 @@
+    
+    http://www.doxygen.nl/ 
+
+    Used to generate documentation 
+
+    https://www.pygame.org/ 
+
+    We used pygame to draw the board to make the game 
+
+    https://www.pygame.org/docs/ 
+
+    Documentation page used as a reference guide to learn more about pygame programming 
