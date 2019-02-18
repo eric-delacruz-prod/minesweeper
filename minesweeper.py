@@ -218,6 +218,10 @@ while run:
         loseFont = pygame.font.SysFont("", 5*TILES_X)
         loseMsg = loseFont.render("GAME OVER!", 1, (175, 0, 0))
         window.blit(loseMsg, (SCREEN_X/6, SCREEN_Y/3))
+        # Press ESC message
+        escFont = pygame.font.SysFont("", 2 * TILES_X)
+        escMsg = escFont.render("ESC to quit", 1, (175, 0, 0))
+        window.blit(escMsg, (SCREEN_X / 3, SCREEN_Y / 2))
         if explosionFrame > EXPLOSION_TIME and NUMBER_EXPLOSIONS > 0:
             gameOver()
             explosionFrame = 0
@@ -232,6 +236,10 @@ while run:
         winFont = pygame.font.SysFont("", 5*TILES_X)
         winMsg = winFont.render("YOU WIN!", 1, (0, 175, 0))
         window.blit(winMsg, (SCREEN_X/6, SCREEN_Y/3))
+        # Press ESC message
+        escFont = pygame.font.SysFont("", 2 * TILES_X)
+        escMsg = escFont.render("ESC to quit", 1, (0, 175, 0))
+        window.blit(escMsg, (SCREEN_X / 3, SCREEN_Y / 2))
 
     pygame.display.flip()
 
