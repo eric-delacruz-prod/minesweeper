@@ -1,3 +1,4 @@
+#import pygame library from https://www.pygame.org/, used documentation from https://www.pygame.org/docs/ as reference
 import pygame
 import board as b
 import game as g
