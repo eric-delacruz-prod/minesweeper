@@ -1,0 +1,7 @@
+- graphical improvements
+- adding game size/difficulty to UI rather than passing as command line arguments
+- adding a timer
+- adding leaderboards with rankings based on time and difficulty
+  - would likely need specific difficulty levels with set size & bomb numbers
+- modifying game victory to trigger when all bombs are flagged correctly
+  - currently it is set to trigger when all non-bombs are revealed
