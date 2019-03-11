@@ -77,7 +77,7 @@ tile_height = tile_width
 explosionFrame = 0
 
 #HELPER FUNCTIONS
-def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
+def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles, correct_flags):
     '''
     Determines whether the game meets the win condition of minesweeper
     @param Tiles_X: Number of tiles in X direction
@@ -88,6 +88,9 @@ def gameWon(Tiles_X, Tiles_Y, NUM_BOMBS, rev_tiles):
     '''
     total = Tiles_X * Tiles_Y - NUM_BOMBS
     if rev_tiles == total:
+        return True
+    
+    elif correct_flags == NUM_BOMBS:
         return True
 
 def convertPygameCoordinates(pygame_x, pygame_y, offset_x, offset_y, width, height):
@@ -235,7 +238,7 @@ while run:
         SHOW_BOMBS = True
 
     #Handle Win.
-    if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
+    if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles, g.correct_flags):
         pygame.event.set_blocked(pygame.MOUSEMOTION)
         winFont = pygame.font.SysFont("", 5*TILES_X)
         winMsg = winFont.render("YOU WIN!", 1, (0, 175, 0))
