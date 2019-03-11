@@ -10,5 +10,5 @@
 
 
 - Bugs
-    - Once all flags are set, cannot unset flags.
+    - (FIXED) Once all flags are set, cannot unset flags.
     - (FIXED) If flag set on a non-bomb square, will be cleared (and flag will be lost) during the recursive reveal.
