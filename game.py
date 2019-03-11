@@ -52,13 +52,7 @@ def rec_reveal(x, y):
     # Check that space is not cleared, not a bomb,and not dead.
     # Also covers case if there is a bomb and it is flagged we
     # simply return
-    if not(myBoard.getCleared(x, y)) and not(myBoard.getBomb(x, y)) and not isDead:
-        # check for case if was not cleared yet and is flagged
-        if myBoard.getFlagged(x, y):
-            # special case when not cleared and not bomb under flag
-            # but this will never be reached by a left click on a
-            # flag itself
-            myBoard.setFlagged(x, y, False)
+    if not(myBoard.getFlagged(x, y)) and not(myBoard.getCleared(x, y)) and not(myBoard.getBomb(x, y)) and not isDead:
         # clear the spot since it was clicked and
         # is in a state that is allowed to be cleared
         myBoard.setCleared(x, y, True, False)
