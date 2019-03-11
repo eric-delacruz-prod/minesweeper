@@ -146,8 +146,9 @@ while run:
 
     #We set up the left and right mouse buttons to default to not pressed.
     left_mouse = False
-    right_mouse = False
-    
+    mid_mouse = False
+    right_mouse = False   
+ 
     #Check for things that have happened.
     for event in pygame.event.get(): #pygame.event.get gets a LIST of EVENTS. You can see this in action by printing these to the screen.
         if event.type == pygame.QUIT: #This is what occurs when you press the "x" button.
@@ -155,6 +156,8 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
             if event.button == 1: #1 is left click. We set the left click flag to true.
                 left_mouse = True
+            elif event.button == 2:
+                mid_mouse = True
             elif (event.button == 3) and (NUM_FLAGS >= 0):#3 is right click. (Think Left, Middle, Right)
                 right_mouse = True
                 x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
@@ -174,6 +177,8 @@ while run:
     try:
         if left_mouse:
             g.leftClick(x_mouse, y_mouse)
+        elif mid_mouse:
+            SHOW_BOMBS = not SHOW_BOMBS
         elif right_mouse:
             g.rightClick(x_mouse, y_mouse)
     except IndexError:
