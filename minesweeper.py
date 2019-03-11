@@ -156,17 +156,19 @@ while run:
                 left_mouse = True
             elif event.button == 2:
                 mid_mouse = True
-            elif (event.button == 3) and (NUM_FLAGS >= 0):#3 is right click. (Think Left, Middle, Right)
+            elif (event.button == 3):#3 is right click. (Think Left, Middle, Right)
                 right_mouse = True
                 x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
                 
-                #First case is for the corner case when all flags are set.
+                #Number of flags does not matter anymore
+                '''''
                 if (NUM_FLAGS == 0) and (g.myBoard.getFlagged(x_mouse, y_mouse) == False):
                     right_mouse = False
                 elif (NUM_FLAGS > 0) and (g.myBoard.getFlagged(x_mouse, y_mouse) == False):
                     NUM_FLAGS -= 1
                 else:
-                     NUM_FLAGS += 1                
+                     NUM_FLAGS += 1  
+                '''''              
                 #print(NUM_FLAGS) #for debugging purposes
         if event.type == pygame.MOUSEMOTION: #Check to see if the mouse has moved.
             x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
