@@ -17,6 +17,7 @@ BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
 NUM_FLAGS = 10 # Number of flags
 SHOW_BOMBS = False #Whether bombs should be shown.
+SHOW_NUMS  = False #Whether adjacent numbers should be shown.
 EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
 
@@ -179,6 +180,7 @@ while run:
             g.leftClick(x_mouse, y_mouse)
         elif mid_mouse:
             SHOW_BOMBS = not SHOW_BOMBS
+            SHOW_NUMS  = not SHOW_NUMS
         elif right_mouse:
             g.rightClick(x_mouse, y_mouse)
     except IndexError:
@@ -201,6 +203,12 @@ while run:
                 if num != 0: #We don't want to print anything is num == 0 (As this would clutter the screen)
                     tileNum = tileFont.render(str(num), 1, (0, 0, 0))
                     window.blit(tileNum, (x_current + (tile_width/5), y_current))
+            elif SHOW_NUMS:
+                pygame.draw.rect(window, (255, 255, 255), (x_current, y_current, tile_width, tile_height))
+                num = g.getCoordinateForCheating(i, j)
+                if num != 0:
+                    tileNum = tileFont.render(str(num), 1, (0, 0, 0))
+                    window.blit(tileNum, (x_current + (tile_width/5), y_current)) 
             elif i == x_mouse and j == y_mouse: #Highlight the current square.
                 pygame.draw.rect(window, (100, 100, 100), (x_current, y_current, tile_width, tile_height))
             else: #Draw an uncleared square.

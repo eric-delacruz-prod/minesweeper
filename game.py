@@ -119,6 +119,12 @@ def getCoordinate(x, y):
         theTile['surrounding'] = _getBombsAroundTile(x, y)
     return theTile
 
+def getCoordinateForCheating(x, y):
+    
+
+    return _getBombsAroundTile(x, y)
+
+
 def _getBombsAroundTile(x, y):
     '''
     PRIVATE: Get the number of bombs surrounding the given tile.
