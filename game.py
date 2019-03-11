@@ -5,7 +5,6 @@ import random
 myBoard = b.Board(1, 1)#The global board object. The real values should be set in initialize.
 BOMBS = 0
 rev_tiles = 0
-correct_flags = 0
 
 def initialize(x_size, y_size, bombs):
     '''
@@ -101,10 +100,6 @@ def rightClick(x, y):
     global myBoard, correct_flags
     if not myBoard.getCleared(x, y):
         myBoard.setFlagged(x, y, not myBoard.getFlagged(x, y))  # toggles the flagged states at (x,y) true->false or false->true
-        if (myBoard.getBomb(x, y)) and (myBoard.getFlagged(x, y)): #if the tile is a bomb and we just set a flag
-            correct_flags += 1
-        elif (myBoard.getBomb(x, y)) and not (myBoard.getFlagged(x, y)): #if the tile is a bomb and we just removed a flag
-            correct_flags -= 1
 def getCoordinate(x, y):
     '''
     Get the state of the tile at the given coordinate.
