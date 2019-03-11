@@ -5,3 +5,10 @@
   - would likely need specific difficulty levels with set size & bomb numbers
 - modifying game victory to trigger when all bombs are flagged correctly
   - currently it is set to trigger when all non-bombs are revealed
+
+
+
+
+- Bugs
+    - Once all flags are set, cannot unset flags.
+    - If a flag is set on a non-bomb square, the game will clear the board and the flag is lost. Impossible to win after this.
