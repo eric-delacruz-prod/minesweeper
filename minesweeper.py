@@ -146,11 +146,13 @@ while run:
     left_mouse = False
     mid_mouse = False
     right_mouse = False   
- 
+
     #Check for things that have happened.
     for event in pygame.event.get(): #pygame.event.get gets a LIST of EVENTS. You can see this in action by printing these to the screen.
         if event.type == pygame.QUIT: #This is what occurs when you press the "x" button.
             run = False #When the user x's out, we stop the loop.
+        if pygame.key.get_pressed() [pygame.K_c] == True:
+            mid_mouse = True
         if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
             if event.button == 1: #1 is left click. We set the left click flag to true.
                 left_mouse = True
