@@ -140,7 +140,7 @@ y_mouse = 0
 
 while run:
 
-    pygame.time.delay(50) #This makes sure that the game doesn't run too fast. Disable at your own risk!
+    #pygame.time.delay(50) #This makes sure that the game doesn't run too fast. Disable at your own risk!
 
     #We set up the left and right mouse buttons to default to not pressed.
     left_mouse = False
@@ -161,7 +161,7 @@ while run:
             elif (event.button == 3):#3 is right click. (Think Left, Middle, Right)
                 right_mouse = True
                 x_mouse, y_mouse = convertPygameCoordinates(event.pos[0], event.pos[1], OFFSET_X, OFFSET_Y, tile_width+BORDER, tile_height+BORDER) #This function converts PYGAME coordinates to GRID coordinates. See it's documentation for more...
-                
+            
                 #Number of flags does not matter anymore
                 '''''
                 if (NUM_FLAGS == 0) and (g.myBoard.getFlagged(x_mouse, y_mouse) == False):
