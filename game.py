@@ -131,9 +131,11 @@ def _getBombsAroundTile(x, y):
     coordsSurrounding = myBoard.getSurrounding(x, y) #Get a list of the coordinates surrounding.
     numberOfBombs = 0
     #Check each coordinate.
-    for i in coordsSurrounding:
-        if myBoard.getBomb(i[0], i[1]):
-            numberOfBombs+=1
+    if not myBoard.getBomb(x, y):
+        for i in coordsSurrounding:
+            if myBoard.getBomb(i[0], i[1]):
+                numberOfBombs+=1
+    
     return numberOfBombs
 
 def _display():
