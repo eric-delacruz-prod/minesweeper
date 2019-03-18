@@ -22,6 +22,7 @@ SHOW_NUMS  = False #Whether adjacent numbers should be shown.
 EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
 SONG_END = pygame.USEREVENT + 1 #for the custom music event 
+stoptime = False #Whether the game has ended for time
 
 #HANDLE USER VARIABLES
 #Handle input from the command line. Valid formats are:
@@ -73,7 +74,7 @@ assert TILES_X <= 30, "Game is too large. Maximum size is 30."
 
 #DO MATH WITH SCREEN SIZE
 SCREEN_X = 30*TILES_X # Width of screen
-SCREEN_Y = 30*TILES_Y # Height of screen
+SCREEN_Y = 32*TILES_Y # Height of screen
 GAME_SIZE_X = 30*TILES_X #The size, in pixels, of the playing area in the x direction
 GAME_SIZE_Y = 30*TILES_X #The size, in pixels, of the playing area in the y direction
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
@@ -157,7 +158,7 @@ pygame.mixer.music.play(0)
 onlyTriggerOnce = True
 
 
-
+t0 = time.time()
 while run:
 
     #pygame.time.delay(50) #This makes sure that the game doesn't run too fast. Disable at your own risk!
@@ -259,6 +260,18 @@ while run:
         y_current += tile_height + BORDER #Like the preceding statement, we increment by the border and the height. Keep in mind that increasing y is downward.
         x_current = OFFSET_X #Reset the current x coordinate to the origin.
 
+        if stoptime == False:
+            t1 = time.time()
+            endtime = t1-t0
+        objective = str(round(endtime, 2))
+        timeFont = pygame.font.SysFont("", 3*TILES_X)
+        timeMsg = timeFont.render(objective, True, (255, 255, 255))
+        #surf = pygame.Surface((100, 100))
+        #surf.fill((255, 255, 255))
+        #window.fill((0, 0, 0)) #Makes the screen be black.
+        #pygame.draw.rect(window, (0, 0, 0), (SCREEN_X, 10), SCREEN_Y)
+        window.blit(timeMsg, (SCREEN_X/2.2, SCREEN_Y/1.065))
+
     # Ends game if ESC is pressed
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
@@ -266,6 +279,7 @@ while run:
 
     #Handle death.
     if g.isDead:
+        stoptime = True
         if onlyTriggerOnce:
             pygame.mixer.music.fadeout(500)
             pygame.mixer.music.load(_songs[3])
@@ -293,14 +307,22 @@ while run:
             pygame.mixer.music.load(_songs[3])
             pygame.mixer.music.play(start=0.5)
             onlyTriggerOnce = False
-        pygame.event.set_blocked(pygame.MOUSEMOTION)
+
         winFont = pygame.font.SysFont("", 5*TILES_X)
-        winMsg = winFont.render("YOU WIN!", 1, (0, 175, 0))
-        window.blit(winMsg, (SCREEN_X/6, SCREEN_Y/3))
+        winMsg = winFont.render("YOU WIN!", True, (0, 175, 0))
+        window.blit(winMsg, (SCREEN_X/4.4, SCREEN_Y/4))
+        if stoptime == False:
+            t1 = time.time()
+            endtime = t1-t0
+            stoptime = True
+        objective = "TIME: " + str(round(endtime, 2))
+        endtimeFont = pygame.font.SysFont("", 3*TILES_X)
+        endtimeMsg = endtimeFont.render(objective, True, (0, 175, 0))
+        window.blit(endtimeMsg, (SCREEN_X/3, SCREEN_Y/2.5))
         # Press ESC message
         escFont = pygame.font.SysFont("", 2 * TILES_X)
         escMsg = escFont.render("ESC to quit", 1, (0, 175, 0))
-        window.blit(escMsg, (SCREEN_X / 3, SCREEN_Y / 2))
+        window.blit(escMsg, (SCREEN_X / 2.6, SCREEN_Y / 2))
 
     pygame.display.flip()
 print("Quitted gracefully.")
