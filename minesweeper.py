@@ -16,11 +16,12 @@ TILES_Y = 20 #Number of tiles in the y direction
 BORDER = 1 #The size, in pixels, of the border between squares.
 NUM_BOMBS = 10 # Number of bombs
 NUM_FLAGS = 10 # Number of flags
+NUM_TILES = 100 # Number of total tiles
 SHOW_BOMBS = False #Whether bombs should be shown.
 SHOW_NUMS  = False #Whether adjacent numbers should be shown.
 EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
-
+SONG_END = pygame.USEREVENT + 1 #for the custom music event 
 
 #HANDLE USER VARIABLES
 #Handle input from the command line. Valid formats are:
@@ -57,6 +58,8 @@ try:
     NUM_FLAGS = user_bombs
     TILES_X = user_width
     TILES_Y = user_height
+    NUM_TILES = TILES_X * TILES_Y
+
 except:
     print("USAGE: ")
     print("python minesweeper.py")
@@ -119,14 +122,21 @@ def gameOver():
     random_c = (255, random.randrange(0, 255), random.randrange(0, 20))
     pygame.draw.circle(window, random_c, (random_x, random_y), random_r)
 
-#GUI
+
+def play_next_song(index):
+    
+    global _songs
+    pygame.mixer.music.load(_songs[index])
+    pygame.mixer.music.play()
 
 #Start Pygame
+pygame.mixer.pre_init(44100, -16, 2, 4096)
 pygame.init() #Starts pygame
 window = pygame.display.set_mode((SCREEN_X, SCREEN_Y))  # Created window to display game
 window.fill((0, 0, 0)) #Makes the screen be black.
 pygame.display.set_caption("Minesweeper") # Sets menu bar title
 pygame.font.init() #Starts the font engine.
+
 
 #Initialize Board
 g.initialize(TILES_X, TILES_Y, NUM_BOMBS) #This is a game.py functionality, it sets up the board.
@@ -137,11 +147,23 @@ run = True #This controls the main game loop.
 
 x_mouse = 0  # Setting x and y mouse coordinates prior to game run prevents x_mouse not defined error
 y_mouse = 0
+game_progress = 0
+
+#Here are the necessary inits for music files
+_songs = ['febSevenTeenPart01.ogg', 'febSevenTeenPart02.ogg', 'febSevenTeenPart03.ogg', 'febSevenTeenPart04.ogg']
+pygame.mixer.music.set_endevent(SONG_END)
+pygame.mixer.music.load('febSevenTeenPart01.ogg')
+pygame.mixer.music.play(0)
+onlyTriggerOnce = True
+
+
 
 while run:
 
     #pygame.time.delay(50) #This makes sure that the game doesn't run too fast. Disable at your own risk!
-
+   
+    completionStatus = g.rev_tiles / NUM_TILES
+ 
     #We set up the left and right mouse buttons to default to not pressed.
     left_mouse = False
     mid_mouse = False
@@ -151,6 +173,14 @@ while run:
     for event in pygame.event.get(): #pygame.event.get gets a LIST of EVENTS. You can see this in action by printing these to the screen.
         if event.type == pygame.QUIT: #This is what occurs when you press the "x" button.
             run = False #When the user x's out, we stop the loop.
+        if event.type == SONG_END:
+            if completionStatus < .25:  
+                play_next_song(0)
+            elif completionStatus < .5:
+                play_next_song(1)
+            elif completionStatus < 1:
+                play_next_song(2)
+            print("music ended")
         if pygame.key.get_pressed() [pygame.K_c] == True:
             mid_mouse = True
         if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
@@ -236,6 +266,11 @@ while run:
 
     #Handle death.
     if g.isDead:
+        if onlyTriggerOnce:
+            pygame.mixer.music.fadeout(500)
+            pygame.mixer.music.load(_songs[3])
+            pygame.mixer.music.play(start=0.5)
+            onlyTriggerOnce = False
         loseFont = pygame.font.SysFont("", 5*TILES_X)
         loseMsg = loseFont.render("GAME OVER!", 1, (175, 0, 0))
         window.blit(loseMsg, (SCREEN_X/6, SCREEN_Y/3))
@@ -253,6 +288,11 @@ while run:
 
     #Handle Win.
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
+        if onlyTriggerOnce:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(_songs[3])
+            pygame.mixer.music.play()
+            onlyTriggerOnce = False
         pygame.event.set_blocked(pygame.MOUSEMOTION)
         winFont = pygame.font.SysFont("", 5*TILES_X)
         winMsg = winFont.render("YOU WIN!", 1, (0, 175, 0))
@@ -263,7 +303,6 @@ while run:
         window.blit(escMsg, (SCREEN_X / 3, SCREEN_Y / 2))
 
     pygame.display.flip()
-
 print("Quitted gracefully.")
 pygame.quit() #If the main game loop breaks, we quit.
 
