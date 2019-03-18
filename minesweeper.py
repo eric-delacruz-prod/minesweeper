@@ -289,9 +289,9 @@ while run:
     #Handle Win.
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
         if onlyTriggerOnce:
-            pygame.mixer.music.stop()
+            pygame.mixer.music.fadeout(500)
             pygame.mixer.music.load(_songs[3])
-            pygame.mixer.music.play()
+            pygame.mixer.music.play(start=0.5)
             onlyTriggerOnce = False
         pygame.event.set_blocked(pygame.MOUSEMOTION)
         winFont = pygame.font.SysFont("", 5*TILES_X)
