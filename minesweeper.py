@@ -70,13 +70,13 @@ except:
 
 #Assertations regarding game size. There is a maximum game size.
 assert TILES_X <= 30, "Game is too large. Maximum size is 30."
-assert TILES_X <= 30, "Game is too large. Maximum size is 30."
+assert TILES_Y <= 30, "Game is too large. Maximum size is 30."
 
 #DO MATH WITH SCREEN SIZE
 SCREEN_X = 30*TILES_X # Width of screen
-SCREEN_Y = 32*TILES_Y # Height of screen
+SCREEN_Y = 30*TILES_Y # Height of screen
 GAME_SIZE_X = 30*TILES_X #The size, in pixels, of the playing area in the x direction
-GAME_SIZE_Y = 30*TILES_X #The size, in pixels, of the playing area in the y direction
+GAME_SIZE_Y = 30*TILES_Y #The size, in pixels, of the playing area in the y direction
 tile_width = (GAME_SIZE_X-(TILES_X*BORDER))/TILES_X
 tile_height = tile_width
 explosionFrame = 0
@@ -130,7 +130,6 @@ def endMusic():
         pygame.mixer.music.fadeout(750)
         play_next_song(7)
         onlyTriggerOnce = False
-        print("Does it even print?")
 
 #called after a song ends
 def play_next_song(index):
@@ -143,7 +142,7 @@ def play_next_song(index):
 #pre_init sets the sampleRate, num channels, buffersize.
 pygame.mixer.pre_init(48000, 16, 2, 1024)
 pygame.init() #Starts pygame
-window = pygame.display.set_mode((SCREEN_X, SCREEN_Y))  # Created window to display game
+window = pygame.display.set_mode((SCREEN_X, SCREEN_Y+(30) ))  # Created window to display game
 window.fill((0, 0, 0)) #Makes the screen be black.
 pygame.display.set_caption("Minesweeper") # Sets menu bar title
 pygame.font.init() #Starts the font engine.
@@ -283,15 +282,16 @@ while run:
         if stoptime == False:
             t1 = time.time()
             endtime = t1-t0
+        fontSize = math.floor((tile_height * 1.5))
         objective = str(round(endtime, 2))
-        timeFont = pygame.font.SysFont("", 3*TILES_X)
+        timeFont = pygame.font.SysFont("", fontSize)
         timeMsg = timeFont.render(objective, True, (255, 255, 255))
         #surf = pygame.Surface((100, 100))
         #surf.fill((255, 255, 255))
         #window.fill((0, 0, 0)) #Makes the screen be black.
         #pygame.draw.rect(window, (0, 0, 0), (SCREEN_X, 10), SCREEN_Y)
-        pygame.draw.rect(window, (0, 0, 0), (0, (SCREEN_Y-39), SCREEN_X, 39))
-        window.blit(timeMsg, (SCREEN_X/2.2, SCREEN_Y/1.065))
+        pygame.draw.rect(window, (0, 0, 0), (0, (SCREEN_Y), SCREEN_X, (30)))
+        window.blit(timeMsg, ((SCREEN_X-(SCREEN_X/2)-35), SCREEN_Y + 0))
 
     # Ends game if ESC is pressed
     keys = pygame.key.get_pressed()
