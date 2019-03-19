@@ -125,6 +125,9 @@ def gameOver():
 
 #plays piano after win/lose
 def endMusic():
+    '''
+    Toggles the music off after the completion of the game
+    '''
     global onlyTriggerOnce
     if onlyTriggerOnce:
         pygame.mixer.music.fadeout(750)
@@ -133,14 +136,16 @@ def endMusic():
 
 #called after a song ends
 def play_next_song(index):
-    
+    '''
+    Looping through song clips
+    '''
     global _songs
     pygame.mixer.music.load(_songs[index])
     pygame.mixer.music.play()
 
 #Start Pygame
 #pre_init sets the sampleRate, num channels, buffersize.
-pygame.mixer.pre_init(48000, 16, 2, 1024)
+pygame.mixer.pre_init(48000, 16, 2, 1024) #Initializes the mixer for the music
 pygame.init() #Starts pygame
 window = pygame.display.set_mode((SCREEN_X, SCREEN_Y+(30) ))  # Created window to display game
 window.fill((0, 0, 0)) #Makes the screen be black.
