@@ -1,7 +1,33 @@
+March 3
+    -Google hangouts
+    -All members
+    -Everyone forked the code and tried to get it work on their respective machines.  Learned Python
+    
+March 6
+    -Google Hangouts
+    -All members
+    -Troubleshooting ideas for a custom addition.  Scheduled for spring break.
+
 March 11 
     - Went through the pre-existing code and finished everything under the "Get it up to code" and "Cheat Mode" section 
     - Eric S 12 - 5 pm
+    
 March 12
-    - Eric S and Kevin working on custom addition. 
+    - Eric S and Kevin working on custom addition. Eric D via Hangout
     - Emailed Paul to get approval on the addition of a progressing soundtrack and a simple timer for the game.
-
+    
+March 13
+    -Google Hangouts
+    -All members
+    -Picked music and started coding to play music and keep time
+    
+March 17
+    -Google Hangouts
+    -All Members
+    -Troubleshooting debugging. Cleaned up code.
+    
+March 18
+    -Google Hangouts
+    -All Members
+    -Finalized debugging for the custom additions. Prepped for retrospective write-ups.
+    
