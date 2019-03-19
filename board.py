@@ -148,3 +148,8 @@ class Board():
             raise KeyError(f"The given data type {type(status)} does not correspond to any accepted data types (bool)")
         else:
             self.field[x+(self.x_size*y)][field] = status
+
+    #def helpBottom:
+        #display
+        #shows the current amount cols and rows, and interpret how to using the cheat mode.
+        
