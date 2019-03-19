@@ -290,6 +290,7 @@ while run:
         #surf.fill((255, 255, 255))
         #window.fill((0, 0, 0)) #Makes the screen be black.
         #pygame.draw.rect(window, (0, 0, 0), (SCREEN_X, 10), SCREEN_Y)
+        pygame.draw.rect(window, (0, 0, 0), (0, (SCREEN_Y-39), SCREEN_X, 39))
         window.blit(timeMsg, (SCREEN_X/2.2, SCREEN_Y/1.065))
 
     # Ends game if ESC is pressed
