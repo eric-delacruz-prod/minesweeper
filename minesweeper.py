@@ -21,7 +21,7 @@ SHOW_BOMBS = False #Whether bombs should be shown.
 SHOW_NUMS  = False #Whether adjacent numbers should be shown.
 EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare set it to 0?
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
-SONG_END = pygame.USEREVENT + 1 #for the custom music event 
+#SONG_END = pygame.USEREVENT + 1 #for the custom music event 
 stoptime = False #Whether the game has ended for time
 
 #HANDLE USER VARIABLES
@@ -124,24 +124,25 @@ def gameOver():
     pygame.draw.circle(window, random_c, (random_x, random_y), random_r)
 
 #plays piano after win/lose
-def endMusic():
-    global onlyTriggerOnce
-    if onlyTriggerOnce:
-        pygame.mixer.music.fadeout(750)
-        play_next_song(7)
-        onlyTriggerOnce = False
-        print("Does it even print?")
+#def endMusic():
+#    global onlyTriggerOnce
+#    if onlyTriggerOnce:
+#        pygame.mixer.music.fadeout(750)
+#        play_next_song(7)
+#        onlyTriggerOnce = False
+#        print("Does it even print?")
 
 #called after a song ends
-def play_next_song(index):
-    
-    global _songs
-    pygame.mixer.music.load(_songs[index])
-    pygame.mixer.music.play()
+#def play_next_song(index):
+#    
+#    global _songs
+#    pygame.mixer.music.load(_songs[index])
+#    pygame.mixer.music.play()
 
 #Start Pygame
 #pre_init sets the sampleRate, num channels, buffersize.
-pygame.mixer.pre_init(48000, 16, 2, 1024)
+#pygame.mixer.init(48000, 16, 2, 1024)
+#pygame.mixer.init()
 pygame.init() #Starts pygame
 window = pygame.display.set_mode((SCREEN_X, SCREEN_Y))  # Created window to display game
 window.fill((0, 0, 0)) #Makes the screen be black.
@@ -163,10 +164,10 @@ game_progress = 0
 #Here are the necessary inits for music files
 _songs = ['marchEightTeen-INTRO.wav','marchEightTeen-PART1.wav','marchEightTeen-PART2.wav','marchEightTeen-PART3.wav','marchEightTeen-PART4.wav','marchEightTeen-PART5.wav','marchEightTeen-PART6.wav','marchEightTeen-FINAL.wav']
 #Define an event that triggers when the song finishes
-pygame.mixer.music.set_endevent(SONG_END)
+#pygame.mixer.music.set_endevent(SONG_END)
 #load and play the very first section immediately
-pygame.mixer.music.load(_songs[0])
-pygame.mixer.music.play(0)
+#pygame.mixer.music.load(_songs[0])
+#pygame.mixer.music.play(0)
 #This bool is disgusting programming style, but I don't know how to get around the end game condition without it.
 onlyTriggerOnce = True
 
@@ -189,19 +190,19 @@ while run:
         if event.type == pygame.QUIT: #This is what occurs when you press the "x" button.
             run = False #When the user x's out, we stop the loop.
         #The following plays the appropritate section of the track based on the percentage complete. 
-        if event.type == SONG_END and onlyTriggerOnce:
-            if completionStatus < .16:  
-                play_next_song(1)
-            elif completionStatus < .32:
-                play_next_song(2)
-            elif completionStatus < .48:
-                play_next_song(3)
-            elif completionStatus < .64:
-                play_next_song(4)
-            elif completionStatus < .8:
-                play_next_song(5)
-            else:
-                play_next_song(6)
+        #if event.type == SONG_END and onlyTriggerOnce:
+        #    if completionStatus < .16:  
+        #        play_next_song(1)
+        #    elif completionStatus < .32:
+        #        play_next_song(2)
+        #    elif completionStatus < .48:
+        #        play_next_song(3)
+        #    elif completionStatus < .64:
+        #        play_next_song(4)
+        #    elif completionStatus < .8:
+        #        play_next_song(5)
+        #   else:
+        #       play_next_song(6)
         if pygame.key.get_pressed() [pygame.K_c] == True:
             mid_mouse = True
         if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
@@ -300,7 +301,7 @@ while run:
 
     #Handle death.
     if g.isDead:
-        endMusic()
+        #endMusic()
         stoptime = True
         loseFont = pygame.font.SysFont("", 5*TILES_X)
         loseMsg = loseFont.render("GAME OVER!", 1, (175, 0, 0))
@@ -320,7 +321,7 @@ while run:
 
     #Handle Win.
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
-        endMusic()
+        #endMusic()
         winFont = pygame.font.SysFont("", 5*TILES_X)
         winMsg = winFont.render("YOU WIN!", True, (0, 175, 0))
         window.blit(winMsg, (SCREEN_X/4.4, SCREEN_Y/4))
