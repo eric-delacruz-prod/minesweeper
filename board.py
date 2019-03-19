@@ -152,4 +152,12 @@ class Board():
     #def helpBottom:
         #display
         #shows the current amount cols and rows, and interpret how to using the cheat mode.
+        #gameDiplay.functionality
         
+        #def text_to_button(msg,color, bx, by, bw,bh, size="small"):
+            #textSurf, textRect = text_objects(msg.color,size)
+            #textRect.center = ((bx+(bw/2)),by+(bh/2))
+            #gameDisplay.blit(textSurf, textRect)
+
+            #pygame.draw.rect(gameDisplay,blue,(150,500,100,50))
+            #text_to_button("play ", black, 150,500,100,50)
