@@ -131,7 +131,7 @@ def play_next_song(index):
     pygame.mixer.music.play()
 
 #Start Pygame
-pygame.mixer.pre_init(44100, -16, 2, 4096)
+pygame.mixer.pre_init(48000, -16, 2, 912)
 pygame.init() #Starts pygame
 window = pygame.display.set_mode((SCREEN_X, SCREEN_Y))  # Created window to display game
 window.fill((0, 0, 0)) #Makes the screen be black.
@@ -151,10 +151,12 @@ y_mouse = 0
 game_progress = 0
 
 #Here are the necessary inits for music files
-_songs = ['febSevenTeenPart01.ogg', 'febSevenTeenPart02.ogg', 'febSevenTeenPart03.ogg', 'febSevenTeenPart04.ogg']
+_songs = ['marchEightTeen-INTRO.wav','marchEightTeen-PART1.wav','marchEightTeen-PART2.wav','marchEightTeen-PART3.wav','marchEightTeen-PART4.wav','marchEightTeen-FINAL.wav']
 pygame.mixer.music.set_endevent(SONG_END)
-pygame.mixer.music.load('febSevenTeenPart01.ogg')
+pygame.mixer.music.load(_songs[0])
 pygame.mixer.music.play(0)
+pygame.mixer.music.queue(_songs[1])
+#This bool is disgusting programming style, but I don't know how to get around the end game condition without it.
 onlyTriggerOnce = True
 
 
@@ -162,7 +164,8 @@ t0 = time.time()
 while run:
 
     #pygame.time.delay(50) #This makes sure that the game doesn't run too fast. Disable at your own risk!
-   
+  
+    #This is used for determining which parts of the music track should be playing.
     completionStatus = g.rev_tiles / NUM_TILES
  
     #We set up the left and right mouse buttons to default to not pressed.
@@ -175,13 +178,16 @@ while run:
         if event.type == pygame.QUIT: #This is what occurs when you press the "x" button.
             run = False #When the user x's out, we stop the loop.
         if event.type == SONG_END:
-            if completionStatus < .25:  
-                play_next_song(0)
-            elif completionStatus < .5:
+            if completionStatus < .32:  
                 play_next_song(1)
-            elif completionStatus < 1:
+            elif completionStatus < .53:
                 play_next_song(2)
-            print("music ended")
+            elif completionStatus < .7:
+                play_next_song(3)
+            elif completionStatus < 1:
+                play_next_song(4)
+            else:
+                play_next_song(5)
         if pygame.key.get_pressed() [pygame.K_c] == True:
             mid_mouse = True
         if event.type == pygame.MOUSEBUTTONDOWN: #Check for pressing a mouse button.
@@ -281,9 +287,8 @@ while run:
     if g.isDead:
         stoptime = True
         if onlyTriggerOnce:
-            pygame.mixer.music.fadeout(500)
-            pygame.mixer.music.load(_songs[3])
-            pygame.mixer.music.play(start=0.5)
+            pygame.mixer.music.fadeout(1000)
+            play_next_song(5)
             onlyTriggerOnce = False
         loseFont = pygame.font.SysFont("", 5*TILES_X)
         loseMsg = loseFont.render("GAME OVER!", 1, (175, 0, 0))
@@ -303,9 +308,8 @@ while run:
     #Handle Win.
     if gameWon(TILES_X, TILES_Y, NUM_BOMBS, g.rev_tiles):
         if onlyTriggerOnce:
-            pygame.mixer.music.fadeout(500)
-            pygame.mixer.music.load(_songs[3])
-            pygame.mixer.music.play(start=0.5)
+            pygame.mixer.music.fadeout(1000)
+            play_next_song(5)
             onlyTriggerOnce = False
 
         winFont = pygame.font.SysFont("", 5*TILES_X)
