@@ -115,8 +115,12 @@ def getCoordinate(x, y):
     return theTile
 
 def getCoordinateForCheating(x, y):
-    
-
+    '''
+    PRIVATE: Get the the x and y values to enable cheat mode.
+    @param x The x coordinate to check around.
+    @param y The y coordinate to check around. 
+    @return The number of bombs surrounding the given coordinate.
+    '''
     return _getBombsAroundTile(x, y)
 
 
