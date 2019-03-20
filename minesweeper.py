@@ -284,7 +284,8 @@ while run:
         y_current += tile_height + BORDER #Like the preceding statement, we increment by the border and the height. Keep in mind that increasing y is downward.
         x_current = OFFSET_X #Reset the current x coordinate to the origin.
 
-        if stoptime == False:
+        #timer part, display the timer under the main window
+        if stoptime == False: 
             t1 = time.time()
             endtime = t1-t0
         fontSize = math.floor((tile_height * 1.5))
