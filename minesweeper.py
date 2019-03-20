@@ -292,13 +292,15 @@ while run:
         objective = str(round(endtime, 2))
         timeFont = pygame.font.SysFont("", fontSize)
         timeMsg = timeFont.render(objective, True, (255, 255, 255))
+        #helpMsg = text_objects('chect mode: press',115)
         #surf = pygame.Surface((100, 100))
         #surf.fill((255, 255, 255))
         #window.fill((0, 0, 0)) #Makes the screen be black.
         #pygame.draw.rect(window, (0, 0, 0), (SCREEN_X, 10), SCREEN_Y)
         pygame.draw.rect(window, (0, 0, 0), (0, (SCREEN_Y), SCREEN_X, (30)))
         window.blit(timeMsg, ((SCREEN_X-(SCREEN_X/2)-35), SCREEN_Y + 0))
-
+        #window.blit(helpMsg, ((SCREEN_X-(SCREEN_X/2)-35), SCREEN_Y + 0))
+    
     # Ends game if ESC is pressed
     keys = pygame.key.get_pressed()
     if keys[pygame.K_ESCAPE]:
