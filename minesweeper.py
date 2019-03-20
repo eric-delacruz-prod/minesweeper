@@ -23,7 +23,7 @@ EXPLOSION_TIME = 0 #How many frames between explosions on game over. Do you dare
 NUMBER_EXPLOSIONS = 20 #How many explosions occur on game over.
 SONG_END = pygame.USEREVENT + 1 #for the custom music event 
 stoptime = False #Whether the game has ended for time
-
+pygame.mixer.init(44100, -16,2,2048) #initialized mixer
 #HANDLE USER VARIABLES
 #Handle input from the command line. Valid formats are:
 #-No arguments (which leaves TILES_X and TILES_Y as they are)
