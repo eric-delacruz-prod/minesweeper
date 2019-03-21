@@ -31,3 +31,21 @@ March 18
     -All Members
     -Finalized debugging for the custom additions. Prepped for retrospective write-ups.
     
+
+Retrospective Write-Up:
+
+How was work split?
+
+Work was really hard to split since it was over spring break and everyone had their own agenda.  We waited on divviying up the work in order to learn about python and the pygame library.  Eventually, Eric S. worked on getting the code up-to-date with the infinite flags, special flag rules, win conditions.  He also worked on the cheat mode and the custom addition of adding music.  Eric D. worked on the custom addition of a timer.  A few of us talked and worked on animations that never made it to the final product.  Everyone else worked on debugging and ensuring all the code was up to par.  
+
+What were challenges and how were they overcome?
+
+The biggest struggle, again, was timing.  It was hard to meet in person, so a lot of meetings just happened over Google hangouts.  Another issue was getting the game to run our individual machines to work on them.  Since, the group before us used python and pygame we had to download all the applications that were concerned around it.  The game ran on linux machines quite nicely, but running on mac and Windows came to be quite the conundrum.  We eventually figured out that each OS had separate command inputs to run the game.  Custom addition problems that we ran into were pygame library issues.  It was hard to figure out what functions were best to use when it came to the timer and music additions.  After, a bit of trial and error, we got those custom additions to work out nicely. 
+
+Did any features not make the demo?
+
+We met all the basic requirements of the prompt given.  We tried to add some animations to the game for fun. We ran into many bug issues that would crash the game when implemented.  Our ideas were to have the tiles turn over and some explosion animations, but when running some of the functions found in pygame they would crash, because we weren't passing in the correct parameters that needed to be initiated at the start of the project.  Since, we didn't have time to build the game around these animations we decided that it would be alright to not implement it in the final project.
+
+Is there anything your team could have done differently?
+
+We could have researched more and tried to figure out how to implement animations differently.  Since, a few of us were working on it all at once we didn't have one clear concise idea on how to approach it.  Maybe, we could have figured the problem out together on a singluar method, so we could have had deeper understanding of one method instead of a superficial one of many.  Communication in groups can always be better as well.  After the first project, we found that it was easiest to meet up over Google hangouts, but since we all weren't in the same room it was hard to keep each other accountable for staying on task.  Overall, we worked out through the strife and completed the project.
